@@ -3,431 +3,116 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>REKTCOON · Bitget Money</title>
-<meta name="description" content="REKTCOON Case 002: following $387.5M stolen from Bitget across ETH, XRP, TRON and BTC. The launderers took a cut and cashed it out to OKX.">
+<title>REKTCOON · Case 002</title>
+<meta name="description" content="REKTCOON Case 002: an independent on-chain investigation into the $387.5M Bitget hack, in two parts.">
 <meta property="og:title" content="REKTCOON · Case 002 · Following the Bitget money">
-<meta property="og:description" content="The launderers charged 0.6% for washing Bitget's stolen XRP — then cashed ~$132K out to an OKX account. Full on-chain trail inside.">
+<meta property="og:description" content="Two-part on-chain investigation: where Bitget's stolen $387.5M went, and who got paid for washing it.">
 <meta property="og:image" content="assets/rektcoon-banner.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@REKTCOON">
 <link rel="icon" href="assets/rektcoon-avatar.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#09050f; --bg2:#110822; --card:#160c2b; --card2:#1d1037; --line:#3a2466;
-  --txt:#f1ecff; --txt2:#c8bde6; --muted:#8f82b3;
-  --purple:#9b4dff; --purple2:#6a24ff; --cyan:#27e8ff; --green:#a4ff3c; --gold:#ffc83d; --red:#ff3d6e;
-  --display:"Unbounded",system-ui,sans-serif; --body:"Onest",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
-}
+:root{--bg:#09050f;--card:#160c2b;--card2:#1d1037;--line:#3a2466;--txt:#f1ecff;--txt2:#c8bde6;--muted:#8f82b3;--purple:#9b4dff;--cyan:#27e8ff;--green:#a4ff3c;--gold:#ffc83d;--red:#ff3d6e;
+  --display:"Unbounded",system-ui,sans-serif;--body:"Onest",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--body);font-size:18px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:
-  radial-gradient(900px 600px at 85% -10%,rgba(155,77,255,.35),transparent 60%),
-  radial-gradient(700px 500px at -10% 30%,rgba(39,232,255,.12),transparent 60%),
-  radial-gradient(800px 600px at 50% 110%,rgba(164,255,60,.08),transparent 60%),var(--bg)}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.25;
-  background-image:linear-gradient(rgba(155,77,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(155,77,255,.12) 1px,transparent 1px);
-  background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 70%)}
-a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(39,232,255,.35)}
-a:hover{color:var(--green);border-color:var(--green)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--body);font-size:18px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(900px 600px at 85% -10%,rgba(155,77,255,.35),transparent 60%),radial-gradient(700px 500px at -10% 40%,rgba(39,232,255,.12),transparent 60%),var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.25;background-image:linear-gradient(rgba(155,77,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(155,77,255,.12) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000,transparent 70%)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
 @media(min-width:760px){.wrap{padding:0 36px}}
-.mono{font-family:var(--mono);font-size:.82em}
-.addr{font-family:var(--mono);font-size:12.5px;word-break:break-all}
-.addr a{border:none}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(9,5,15,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;letter-spacing:.02em;border:none;color:var(--txt)}
-.brand img{width:34px;height:34px;border-radius:50%;box-shadow:0 0 0 2px var(--purple),0 0 18px var(--purple)}
-.brand span b{color:var(--green)}
-.live{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
-.live i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:blink 1.4s infinite}
-@keyframes blink{50%{opacity:.25}}
-.asof{font-family:var(--mono);font-size:11px;color:var(--muted)}
-
-/* hero */
-.hero{position:relative;margin-top:22px;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(155,77,255,.6);min-height:clamp(420px,42vw,520px);display:flex;align-items:center}
-.hero img.banner{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 50%}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,5,15,.95) 0%,rgba(9,5,15,.85) 45%,rgba(9,5,15,.15) 78%)}
-.hero .copy{position:relative;padding:clamp(20px,4vw,52px);max-width:min(700px,62%)}
-.tag{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--green);padding:5px 10px;border-radius:999px;max-width:100%;font-weight:800}
-h1{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.9vw,52px);line-height:1.02;margin:14px 0 14px;letter-spacing:-.02em;text-transform:uppercase;overflow-wrap:anywhere}
-h1 .g{color:var(--gold);text-shadow:0 0 24px rgba(255,200,61,.45)}
-h1 .c{color:var(--cyan);text-shadow:0 0 24px rgba(39,232,255,.45)}
-.dek{font-family:var(--body);text-transform:none;letter-spacing:0;color:var(--txt2);font-size:clamp(15px,1.5vw,19px);line-height:1.55;max-width:46ch;margin:0}
-@media(max-width:760px){
-  .hero{align-items:flex-end;min-height:640px}
-  .hero img.banner{object-position:80% 0%;height:62%;top:0;bottom:auto}
-  .hero .shade{background:linear-gradient(180deg,rgba(9,5,15,0) 0%,rgba(9,5,15,.7) 40%,rgba(9,5,15,1) 62%)}
-  .hero .copy{max-width:100%}
-}
-.byline{display:flex;align-items:center;gap:12px;margin:18px 0 0;font-family:var(--mono);font-size:12px;color:var(--txt2)}
-.byline img{width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 2px var(--cyan)}
-
-/* ticker */
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 8px}
-@media(min-width:900px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.stat{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:18px}
-.stat .n{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.6vw,42px);line-height:1}
-.stat .l{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:10px}
-.n.g{color:var(--gold)} .n.c{color:var(--cyan)} .n.gr{color:var(--green)} .n.r{color:var(--red)}
-
-/* sections */
-section{padding:56px 0 8px}
-.sec{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
-.sec .num{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,54px);color:transparent;-webkit-text-stroke:1.5px var(--purple);line-height:1}
-.sec .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
-h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.6vw,40px);line-height:1.1;margin:0 0 16px;letter-spacing:-.01em}
-h2 em{font-style:normal;color:var(--green)}
-.prose{max-width:70ch;color:var(--txt2);overflow-wrap:anywhere}
-.prose p{margin:0 0 1em}
-.prose b,.prose strong{color:var(--txt)}
-.hl{color:var(--bg);background:var(--gold);padding:0 6px;border-radius:4px;font-weight:700}
-.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:20px;margin:20px 0}
-.card.glow{border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,200,61,.25),0 20px 60px -20px rgba(255,200,61,.35)}
-.card.cy{border-color:var(--cyan);box-shadow:0 20px 60px -25px rgba(39,232,255,.4)}
-.card h3{margin:0 0 10px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
-.card.cy h3{color:var(--cyan)}
-.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
-@media(min-width:900px){.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.grid3{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
-@media(min-width:900px){.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.mini{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.mini .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.mini .v{font-family:var(--display);font-weight:700;font-size:22px;margin-top:6px}
-.mini p{margin:8px 0 0;font-size:15px;color:var(--txt2)}
-
-/* chain */
-.chain{display:flex;flex-direction:column;gap:0;margin:16px 0}
-.step{position:relative;padding:14px 16px 14px 52px;border-left:2px dashed var(--line);margin-left:18px}
-.step:last-child{border-left-color:transparent}
-.step .dot{position:absolute;left:-19px;top:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:14px;background:var(--card2);border:2px solid var(--purple);color:var(--purple)}
-.step.hot .dot{border-color:var(--gold);color:var(--gold);box-shadow:0 0 18px rgba(255,200,61,.5)}
-.step .t{font-weight:700}
-.step .d{color:var(--txt2);font-size:15px}
-
-/* tables */
-.tw{overflow-x:auto;margin:14px 0}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-weight:600}
-td{padding:10px 8px;border-bottom:1px solid rgba(58,36,102,.5);vertical-align:middle}
-td.num,th.num{text-align:right;font-family:var(--mono);white-space:nowrap}
-tr.top td{background:rgba(255,200,61,.07)}
-.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
-.pill.g{color:var(--green);border-color:rgba(164,255,60,.4)} .pill.r{color:var(--red);border-color:rgba(255,61,110,.4)} .pill.c{color:var(--cyan);border-color:rgba(39,232,255,.4)} .pill.y{color:var(--gold);border-color:rgba(255,200,61,.4)}
-.copy{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;background:transparent;color:var(--cyan);border:1px solid rgba(39,232,255,.4);border-radius:8px;padding:4px 8px;cursor:pointer}
-.copy:hover{background:var(--cyan);color:var(--bg)}
-.copy.ok{background:var(--green);border-color:var(--green);color:var(--bg)}
-@media(max-width:700px){
-  table.stack thead{display:none}
-  table.stack tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:12px 0;border-bottom:1px solid var(--line)}
-  table.stack td{border:none;padding:0}
-  table.stack td.num{text-align:left}
-  table.stack td.full{grid-column:1/-1}
-}
-
-/* bars */
-.bar{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin-bottom:14px}
-@media(min-width:760px){.bar{grid-template-columns:190px minmax(0,1fr) 90px;align-items:center;gap:14px}}
-.bar .nm{font-family:var(--mono);font-size:13px;font-weight:600}
-.bar .tr{height:22px;background:rgba(155,77,255,.12);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
-.bar .fi{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--purple2),var(--purple));transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
-.bar.top .fi{background:linear-gradient(90deg,#ff9f1c,var(--gold))}
-.bar .vl{font-family:var(--mono);font-size:13px;text-align:right}
-.bar .sub{font-family:var(--mono);font-size:11px;color:var(--muted)}
-@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-/* flow svg */
-.flow{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--card);padding:10px}
-.flow svg{display:block;width:100%;min-width:760px;height:auto}
-.flow text{font-family:var(--mono);fill:var(--txt)}
-.flow .s{font-size:10px;fill:var(--muted)}
-.flow .bx{fill:var(--card2);stroke:var(--line);stroke-width:1.5;rx:10}
-.flow .bx.p{stroke:var(--purple)} .flow .bx.y{stroke:var(--gold)} .flow .bx.c{stroke:var(--cyan)} .flow .bx.g{stroke:var(--green)}
-.flow .ln{fill:none;stroke-opacity:.8}
-.flow .dash{stroke-dasharray:6 6;animation:dash 1.1s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-12}}
-
-/* search list */
-.search{width:100%;font-family:var(--mono);font-size:14px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);margin:12px 0 8px}
-.search:focus{outline:2px solid var(--cyan)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tabs button{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--txt2);border-radius:999px;padding:6px 12px;cursor:pointer}
-.tabs button.on{background:var(--purple);border-color:var(--purple);color:#fff}
-.wlist{display:grid;grid-template-columns:minmax(0,1fr);column-gap:24px;font-family:var(--mono);font-size:12px;line-height:2;max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card)}
-@media(min-width:760px){.wlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.wlist a{border:none;color:var(--txt2);word-break:break-all}
-.wlist a:hover{color:var(--green)}
-.count{font-family:var(--mono);font-size:11px;color:var(--muted)}
-
-.dl{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
-@media(min-width:760px){.dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.dl a{display:block;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--card);color:var(--txt)}
-.dl a:hover{border-color:var(--green);box-shadow:0 0 24px -6px var(--green)}
-.dl b{display:block;font-family:var(--mono);font-size:13px;color:var(--cyan)}
-.dl span{font-size:13px;color:var(--muted)}
-
-.not{border-left:3px solid var(--red);padding-left:14px}
-.did{border-left:3px solid var(--green);padding-left:14px}
-.cols ul{margin:8px 0 0;padding-left:18px;color:var(--txt2);font-size:15px}
-.cols li{margin-bottom:6px}
-.quote{border-left:3px solid var(--cyan);padding:6px 0 6px 16px;margin:18px 0;color:var(--txt);font-style:italic}
-footer{margin-top:60px;border-top:1px solid var(--line);padding:30px 0 60px;font-size:13px;color:var(--muted)}
-footer .brand{margin-bottom:10px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+.nav{border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900}
+.brand img{width:36px;height:36px;border-radius:50%;box-shadow:0 0 0 2px var(--purple),0 0 18px var(--purple)}
+.brand b{color:var(--green)}
+.x{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--txt2)}
+.x:hover{border-color:var(--cyan);color:var(--cyan)}
+.cover{position:relative;margin-top:22px;border-radius:22px;overflow:hidden;border:1px solid var(--line);min-height:clamp(380px,40vw,470px);display:flex;align-items:center;box-shadow:0 30px 80px -30px rgba(155,77,255,.6)}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 50%}
+.cover .sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,5,15,.96) 0%,rgba(9,5,15,.82) 45%,rgba(9,5,15,.1) 78%)}
+.cover .c{position:relative;padding:clamp(20px,4vw,52px);max-width:min(640px,60%)}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--green);padding:5px 10px;border-radius:999px;font-weight:800}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(28px,4.2vw,54px);line-height:1.02;margin:14px 0 12px;text-transform:uppercase;letter-spacing:-.02em}
+h1 span{color:var(--gold);text-shadow:0 0 24px rgba(255,200,61,.45)}
+.lead{color:var(--txt2);margin:0;max-width:46ch}
+@media(max-width:760px){.cover{align-items:flex-end;min-height:600px}.cover img{height:60%;object-position:80% 0%}.cover .sh{background:linear-gradient(180deg,transparent 0%,rgba(9,5,15,.7) 40%,var(--bg) 62%)}.cover .c{max-width:100%}}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}
+@media(min-width:900px){.facts{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.f{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:16px}
+.f .n{font-family:var(--display);font-weight:900;font-size:clamp(22px,3vw,34px);line-height:1}
+.f .l{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:8px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,32px);margin:48px 0 16px}
+.chain{position:relative;display:grid;gap:18px;padding-left:34px}
+.chain::before{content:"";position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--purple),var(--green))}
+.part{position:relative;display:grid;grid-template-columns:minmax(0,1fr);background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .15s,box-shadow .15s,border-color .15s}
+.part:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 20px 50px -20px rgba(39,232,255,.5)}
+.part::before{content:attr(data-n);position:absolute;left:-34px;top:20px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:13px;background:var(--bg);border:2px solid var(--purple);color:var(--purple)}
+.part.new::before{border-color:var(--green);color:var(--green);box-shadow:0 0 16px rgba(164,255,60,.5)}
+.part .meta{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.pill{border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--txt2)}
+.pill.g{color:var(--bg);background:var(--green);border-color:var(--green);font-weight:800}
+.part h3{font-family:var(--display);font-weight:900;font-size:clamp(20px,2.8vw,30px);line-height:1.15;margin:12px 0 10px}
+.part ul{margin:0;padding-left:18px;color:var(--txt2);font-size:15px}
+.part .go{margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--cyan)}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:26px 0 50px;font-size:13px;color:var(--muted)}
+footer a{color:var(--cyan)}
 </style>
 </head>
 <body>
-
 <div class="nav"><div class="wrap">
-  <a class="brand" href="https://x.com/REKTCOON" target="_blank" rel="noopener"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
-  <span class="live"><i></i>Case 002 · live · funds moving</span>
-  <span class="asof">Updated 28 Sep 2026 · 20:00 UTC</span>
+  <a class="brand" href="./"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
+  <a class="x" href="https://x.com/REKTCOON" target="_blank" rel="noopener">Follow @REKTCOON on X ↗</a>
 </div></div>
 
 <main class="wrap">
-
-<header class="hero">
-  <img class="banner" src="assets/rektcoon-banner.webp" alt="">
-  <div class="shade"></div>
-  <div class="copy">
-    <span class="tag">⚡ Update #2 · Bitget hack · $387.5M</span>
-    <h1>The launderers took a <span class="g">cut</span>. Then cashed it out to <span class="c">OKX</span>.</h1>
-    <p class="dek">We followed Bitget's stolen money across ETH, XRP, TRON and Bitcoin. It is one operation, and the people washing it charged a fee and sent it to a centralized exchange.</p>
-    <div class="byline"><img src="assets/rektcoon-avatar.webp" alt=""><span>by <a href="https://x.com/REKTCOON" target="_blank" rel="noopener">@REKTCOON</a> · on-chain only · every claim links to a tx</span></div>
-  </div>
-</header>
-
-<div class="stats">
-  <div class="stat"><div class="n g">$131,982</div><div class="l">Launderer fees cashed out to an OKX account</div></div>
-  <div class="stat"><div class="n c">~$187M</div><div class="l">Bitget funds swapped through THORChain (gross)</div></div>
-  <div class="stat"><div class="n gr">485</div><div class="l">Fresh laundering wallets mapped (246 ETH + 239 XRP)</div></div>
-  <div class="stat"><div class="n r">$107M</div><div class="l">Still sitting in storage (39,885 ETH)</div></div>
-</div>
-
-<!-- 01 -->
-<section id="context">
-  <div class="sec"><span class="num">01</span><span class="lab">Context</span></div>
-  <h2>ZachXBT named the launderers. <em>We followed the money.</em></h2>
-  <div class="prose">
-    <p>On 24 Sep 2026 attackers drained Bitget's hot wallets. Bitget later raised the loss to <b>$387.5M</b> across Ethereum and EVM chains, XRP Ledger, TRON and Zcash. Bitget and TRM point to North Korea.</p>
-    <p>On 28 Sep <a href="https://x.com/zachxbt/status/2104528688469647700" target="_blank" rel="noopener">ZachXBT published</a> five aliases of Chinese launderers who openly asked THORChain-ecosystem support channels why their XRP→BTC swaps were stuck. The same day THORChain <a href="https://www.coindesk.com/tech/2026/09/28/thorchain-rejects-bitget-request-to-block-hacker-as-usd6-million-moves-to-bitcoin" target="_blank" rel="noopener">refused Bitget's request</a> to block the attacker.</p>
-    <p>This update covers what wasn't public yet: where the money actually went, how the legs connect, and who got paid for washing it.</p>
-  </div>
-  <div class="quote">"Decentralization is a design principle, not a shield for facilitating known stolen funds." (Gracy Chen, Bitget CEO)</div>
-</section>
-
-<!-- 02 OKX -->
-<section id="okx">
-  <div class="sec"><span class="num">02</span><span class="lab">The big one</span></div>
-  <h2>A 0.6% "laundering fee", cashed out to <em>OKX</em></h2>
-  <div class="prose">
-    <p>Every THORChain swap memo can carry an <b>affiliate</b>: the interface that routed the swap and the fee it takes. Most affiliates are public apps. One wasn't.</p>
-    <p><b>thor18dvgrgpvxlh7rhhld4qjyrxs9c7tvwdakrkjm4</b> has no registered name. It appeared as the affiliate on <b>401 swaps, all on 26–27 Sep, 397 of them from XRP</b>, charging up to <span class="hl">0.6%</span>. <b>15 of its 16 senders are the Bitget attacker's XRP wallets.</b> The 16th is the address itself, cashing out. It had no other customers. It looks like the launderers' own fee wallet.</p>
-  </div>
-  <div class="card glow">
-    <h3>Follow the fee</h3>
-    <div class="chain">
-      <div class="step"><span class="dot">1</span><div class="t">Attacker's XRP wallets → THORChain (XRP→BTC swaps)</div><div class="d">Affiliate field: <span class="addr">thor18dvg…krkjm4</span>, 0.3–0.6% per swap, ~$31.9M volume.</div></div>
-      <div class="step"><span class="dot">2</span><div class="t">Fee wallet swaps RUNE → USDT on Ethereum</div><div class="d">27 Sep 05:46 UTC: 114,617 RUNE → 92,586.74 USDT · 28 Sep 08:08: 15,821 RUNE → 11,469.14 USDT → <a class="addr" href="https://etherscan.io/address/0x18e0428ddeb8787b797196f9af32308a78179218#tokentxns" target="_blank" rel="noopener">0x18e0428d…179218</a> (created 26 Sep)</div></div>
-      <div class="step hot"><span class="dot">3</span><div class="t">4 deposits to an OKX deposit address</div><div class="d"><a class="addr" href="https://etherscan.io/address/0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be#tokentxns" target="_blank" rel="noopener">0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be</a> forwards each deposit within 1–2 minutes to <a class="addr" href="https://etherscan.io/address/0x559432E18b281731c054cD703D4B49872BE4ed53" target="_blank" rel="noopener">OKX: Hot Wallet 5</a>, the standard exchange deposit sweep.</div></div>
+  <header class="cover">
+    <img src="assets/rektcoon-banner.webp" alt="">
+    <div class="sh"></div>
+    <div class="c">
+      <span class="tag">Case 002 · Bitget hack · 24 Sep 2026</span>
+      <h1>Following <span>$387.5M</span> of stolen Bitget money</h1>
+      <p class="lead">An independent on-chain investigation in two parts: from the first 21 minutes after the hack to a laundering fee that ended up on an exchange account.</p>
     </div>
-    <div class="tw"><table class="stack">
-      <thead><tr><th>Deposit (UTC)</th><th class="num">USDT</th><th>Deposit tx</th><th>Sweep to OKX</th></tr></thead>
-      <tbody>
-        <tr><td>26 Sep 20:28</td><td class="num">6,613.60</td><td class="addr full"><a href="https://etherscan.io/tx/0xd61d2e0ae1e62a1eb902f1fa4465f77be6c8e32e1364fa5f141f8c5fb0d0d573" target="_blank" rel="noopener">0xd61d2e0a…d0d573</a></td><td class="addr"><a href="https://etherscan.io/tx/0x05be5514ced5156161379099e75986ddfa900bbc88dcb1fa231cec7f943a671a" target="_blank" rel="noopener">0x05be5514…3a671a</a></td></tr>
-        <tr><td>26 Sep 21:31</td><td class="num">21,312.05</td><td class="addr full"><a href="https://etherscan.io/tx/0xba29d8059310f1caaf54dadf7edc0ced7739f09fb3900911ef35296da3b1d528" target="_blank" rel="noopener">0xba29d805…b1d528</a></td><td class="addr"><a href="https://etherscan.io/tx/0x79e335aa7afd9aee14322b3af2aa6d699f553c1eeb386de02965e56731bc2970" target="_blank" rel="noopener">0x79e335aa…bc2970</a></td></tr>
-        <tr class="top"><td>27 Sep 21:59</td><td class="num">92,586.74</td><td class="addr full"><a href="https://etherscan.io/tx/0x57888a8ee758b2a76d7c73bff754c02199736cd19c829ffb332d102d5b4a6619" target="_blank" rel="noopener">0x57888a8e…4a6619</a></td><td class="addr"><a href="https://etherscan.io/tx/0x3a50b73c69aa67fdf0017df90fa9b2b03ead9d9a62110d71e64724732dd70e0f" target="_blank" rel="noopener">0x3a50b73c…d70e0f</a></td></tr>
-        <tr><td>28 Sep 08:11</td><td class="num">11,469.14</td><td class="addr full"><a href="https://etherscan.io/tx/0x65c4d59381578dce1b372682a7f3871a33626008c70ab31bf375905697d5c2cb" target="_blank" rel="noopener">0x65c4d593…d5c2cb</a></td><td class="addr"><a href="https://etherscan.io/tx/0xa4594caad08f45a4b389a0495c02f8094bd63c2984ae4f0d88d1ca233c2a37d0" target="_blank" rel="noopener">0xa4594caa…2a37d0</a></td></tr>
-        <tr class="top"><td><b>Total</b></td><td class="num"><b>131,981.53</b></td><td></td><td></td></tr>
-      </tbody>
-    </table></div>
-    <p style="margin:6px 0 0;font-size:14px;color:var(--txt2)">Reported to Bitget's recovery program on 28 Sep. OKX can identify the account behind this deposit address. It may belong to the operator or to an intermediary such as an OTC desk; we make no claim about who that is.</p>
+  </header>
+
+  <div class="facts">
+    <div class="f"><div class="n" style="color:var(--gold)">$387.5M</div><div class="l">Stolen from Bitget (per Bitget)</div></div>
+    <div class="f"><div class="n" style="color:var(--cyan)">4 chains</div><div class="l">ETH · XRP · TRON · BTC traced</div></div>
+    <div class="f"><div class="n" style="color:var(--green)">485</div><div class="l">Laundering wallets mapped</div></div>
+    <div class="f"><div class="n" style="color:var(--red)">$131,982</div><div class="l">Launderer fees sent to OKX</div></div>
   </div>
-  <p class="mono" style="color:var(--muted)">Verify: <a href="https://thorchain.net/address/thor18dvgrgpvxlh7rhhld4qjyrxs9c7tvwdakrkjm4" target="_blank" rel="noopener">affiliate on thorchain.net</a> · <a href="https://gateway.liquify.com/chain/thorchain_midgard/v2/actions?affiliate=thor18dvgrgpvxlh7rhhld4qjyrxs9c7tvwdakrkjm4" target="_blank" rel="noopener">Midgard: swaps with this affiliate</a></p>
-</section>
 
-<!-- 03 affiliates -->
-<section id="fees">
-  <div class="sec"><span class="num">03</span><span class="lab">Who got paid</span></div>
-  <h2>~$327K in fees written into the <em>laundering memos</em></h2>
-  <div class="prose"><p>We decoded 5,569 attacker deposits into THORChain (5,281 from XRP, 288 from ETH), about <b>$187M gross</b> including funds re-deposited after refunds. 4,546 carried an affiliate. Below are the fees declared in those memos. The protocol only pays them on successful swaps, so real payouts are lower. Public apps take these fees automatically, and that alone says nothing about intent. The only affiliate whose sole customer was the attacker is #1.</p></div>
-  <div id="aff" style="margin-top:18px"></div>
-  <p class="mono" style="color:var(--muted)">Names are THORNames from the on-chain registry. Only "ss" is labeled on Etherscan (ShapeShift DAO Treasury). "thor18dvg…" has no THORName.</p>
-</section>
-
-<!-- 04 one operation -->
-<section id="converge">
-  <div class="sec"><span class="num">04</span><span class="lab">One operation</span></div>
-  <h2>The XRP and ETH legs end in the <em>same Bitcoin wallets</em></h2>
-  <div class="prose"><p>THORChain memos state the destination address of every swap. <b>Six BTC addresses receive swaps from both the XRP leg and the ETH leg</b>, and two ETH wallets in our laundering graph also receive XRP→ETH swaps. Same pipeline, same operator.</p></div>
-  <div class="tw"><table class="stack" id="shared"><thead><tr><th>BTC address</th><th class="num">From XRP leg</th><th class="num">From ETH leg</th><th></th></tr></thead><tbody></tbody></table></div>
-</section>
-
-<!-- 05 flow -->
-<section id="flow">
-  <div class="sec"><span class="num">05</span><span class="lab">The map</span></div>
-  <h2>Four chains, one <em>pipeline</em></h2>
-  <div class="flow">
-  <svg viewBox="0 0 1000 440" role="img" aria-label="Flow of stolen Bitget funds across chains">
-    <path class="ln" stroke="#9b4dff" stroke-width="8" d="M170 60 C 230 60, 230 110, 290 110"/>
-    <path class="ln" stroke="#27e8ff" stroke-width="10" d="M170 200 C 230 200, 230 200, 290 200"/>
-    <path class="ln" stroke="#a4ff3c" stroke-width="5" d="M170 330 C 230 330, 230 290, 290 290"/>
-    <path class="ln dash" stroke="#9b4dff" stroke-width="8" d="M470 110 C 540 110, 560 170, 620 180"/>
-    <path class="ln dash" stroke="#27e8ff" stroke-width="12" d="M470 200 C 540 200, 560 200, 620 200"/>
-    <path class="ln dash" stroke="#a4ff3c" stroke-width="4" d="M470 290 C 540 290, 560 330, 620 350"/>
-    <path class="ln dash" stroke="#ffc83d" stroke-width="12" d="M780 200 C 830 200, 840 90, 880 90"/>
-    <path class="ln dash" stroke="#ffc83d" stroke-width="3" d="M700 230 C 700 290, 760 310, 820 310"/>
-    <rect class="bx p" x="20" y="35" width="150" height="50" rx="10"/><text x="32" y="57" font-size="12">Bitget · ETH/EVM</text><text x="32" y="74" class="s">~24.6K ETH + $47.6M stables</text>
-    <rect class="bx c" x="20" y="175" width="150" height="50" rx="10"/><text x="32" y="197" font-size="12">Bitget · XRP</text><text x="32" y="214" class="s">102.98M XRP</text>
-    <rect class="bx g" x="20" y="305" width="150" height="50" rx="10"/><text x="32" y="327" font-size="12">Bitget · TRON</text><text x="32" y="344" class="s">20.59M TRX</text>
-    <rect class="bx p" x="290" y="85" width="180" height="50" rx="10"/><text x="302" y="107" font-size="12">246 ETH wallets</text><text x="302" y="124" class="s">storage → funnel Ex.4</text>
-    <rect class="bx c" x="290" y="175" width="180" height="50" rx="10"/><text x="302" y="197" font-size="12">239 XRP wallets</text><text x="302" y="214" class="s">~9K XRP left</text>
-    <rect class="bx g" x="290" y="265" width="180" height="50" rx="10"/><text x="302" y="287" font-size="12">TRX → USDT/USDD</text><text x="302" y="304" class="s">USDT0 bridge · xSwap</text>
-    <rect class="bx y" x="620" y="170" width="160" height="60" rx="10"/><text x="632" y="194" font-size="13" style="fill:#ffc83d">THORChain</text><text x="632" y="212" class="s">~$187M gross</text>
-    <rect class="bx p" x="620" y="330" width="160" height="44" rx="10"/><text x="632" y="350" font-size="12">LayerZero · Skip:Go</text><text x="632" y="366" class="s">Symbiosis · Chainflip</text>
-    <rect class="bx y" x="880" y="60" width="110" height="60" rx="10"/><text x="892" y="84" font-size="12" style="fill:#ffc83d">Bitcoin</text><text x="892" y="102" class="s">1,967 BTC in</text>
-    <rect class="bx c" x="820" y="290" width="170" height="44" rx="10"/><text x="832" y="310" font-size="12" style="fill:#27e8ff">OKX account</text><text x="832" y="326" class="s">131,982 USDT (fees)</text>
-  </svg></div>
-  <p class="mono" style="color:var(--muted)">Simplified. Line widths approximate.</p>
-</section>
-
-<!-- 06 legs -->
-<section id="legs">
-  <div class="sec"><span class="num">06</span><span class="lab">Leg by leg</span></div>
-  <h2>What happened on each <em>chain</em></h2>
-  <div class="grid3">
-    <div class="mini"><div class="k">Ethereum</div><div class="v">29,038 ETH out</div><p>Storage wallets are being drained one by one into a funnel, <b>Exploiter 4</b>: Ex.14 → Ex.4 (28 Sep 11:52), Ex.9 → Ex.4 (14:28), Ex.10 → Ex.4 (18:55). Ex.4 sprays it into the same intermediate wallets used since 27 Sep. The main $47.6M in stablecoins was swapped to ETH within 21 minutes of the hack, before any freeze.</p></div>
-    <div class="mini"><div class="k">XRP Ledger</div><div class="v">102.98M XRP · ~9K left</div><p>Split into 20M chunks, then pushed through 239 fresh wallets into THORChain with <b>5,281 deposits</b> in 4 days. About 101M XRP went to BTC (111 addresses), ~8M to ETH, 1.36M to BNB, 321,786 via NEAR Intents.</p></div>
-    <div class="mini"><div class="k">TRON</div><div class="v">20.59M TRX · emptied</div><p>One wallet that received 5.57M TRX was <b>created 24 Sep 13:48 UTC, ~5 hours before the hack</b>. 15M TRX was swapped to 5.07M USDT on a TRON DEX and bridged out via the USDT0 (LayerZero OFT) contract, plus USDD and an xSwap vault. Everything left within ~15 hours.</p></div>
+  <h2>The investigation</h2>
+  <div class="chain">
+    <a class="part" data-n="1" href="part-1.html">
+      <div class="meta"><span class="pill">Part 1</span><span class="pill">27–28 Sep</span><span class="pill">Ethereum leg</span></div>
+      <h3>Following the Bitget money</h3>
+      <ul>
+        <li>$47.6M in stablecoins swapped to ETH in 21 minutes, before anyone could freeze them</li>
+        <li>246 fresh laundering wallets, none labeled at the time</li>
+        <li>The first 15 Bitcoin addresses, decoded from THORChain memos</li>
+      </ul>
+      <div class="go">Read Part 1 →</div>
+    </a>
+    <a class="part new" data-n="2" href="part-2.html">
+      <div class="meta"><span class="pill g">New</span><span class="pill">Part 2</span><span class="pill">28 Sep</span><span class="pill">XRP · TRON · BTC</span></div>
+      <h3>The launderers took a cut. Then cashed it out to OKX.</h3>
+      <ul>
+        <li>A THORChain affiliate whose only customer was the attacker: ~0.6% fee, 131,982 USDT deposited to an OKX account</li>
+        <li>XRP and ETH legs end in the same 6 BTC wallets: one operation</li>
+        <li>A TRON wallet created 5 hours before the hack · 163.66 BTC sitting untouched</li>
+      </ul>
+      <div class="go">Read Part 2 →</div>
+    </a>
   </div>
-</section>
-
-<!-- 07 BTC -->
-<section id="btc">
-  <div class="sec"><span class="num">07</span><span class="lab">Bitcoin</span></div>
-  <h2>1,967 BTC in. Only 20.8 BTC went <em>straight to a mixer</em>.</h2>
-  <div class="prose"><p>The 96 BTC destinations decoded from the ETH leg and the first XRP pass received <b>1,967 BTC (~$164M)</b>. Only 20.8 BTC went directly into CoinJoin-style transactions. The rest moved on through ordinary transfers. These <b>163.66 BTC are sitting untouched</b> in seven second-hop addresses:</p></div>
-  <div class="tw"><table class="stack" id="unspent"><thead><tr><th>Address</th><th class="num">BTC</th><th></th></tr></thead><tbody></tbody></table></div>
-  <p class="mono" style="color:var(--muted)">Exchanges: flag deposits from these. All 120 BTC destinations are in the downloads.</p>
-</section>
-
-<!-- 08 watch -->
-<section id="watch">
-  <div class="sec"><span class="num">08</span><span class="lab">Watch list</span></div>
-  <h2>$107M still <em>waiting</em></h2>
-  <div class="tw"><table class="stack"><thead><tr><th>Wallet</th><th>Address</th><th class="num">ETH</th><th class="num">Status</th></tr></thead><tbody id="hold"></tbody></table></div>
-</section>
-
-<!-- 09 details -->
-<section id="details">
-  <div class="sec"><span class="num">09</span><span class="lab">Details</span></div>
-  <h2>Small things that <em>matter</em></h2>
-  <div class="grid2">
-    <div class="card cy"><h3>Burner Discord accounts</h3><p style="margin:0;color:var(--txt2);font-size:15px">Discord IDs encode their creation time. From ZachXBT's list: <b>"HELP ME" was created 31 minutes</b> before asking for help, <b>"jack" 5 hours</b> before his first ticket. "lolo / Marin" dates back to Sep 2022, and "Cc" and "Melon" to 2025. Two were made for this job; three are regulars.</p></div>
-    <div class="card cy"><h3>Wallets older than the hack</h3><p style="margin:0;color:var(--txt2);font-size:15px">An ETH wallet active since May 2026 (<span class="addr">0x8eEc4bcA…54c9</span>) received ~3M XRP worth of swaps and fed ETH back into the graph. A BTC address that got THORChain payouts in Apr–May 2025 (<span class="addr">bc1qle6cq42…6edr</span>) woke up on 26 Sep. These are leads, not attribution.</p></div>
-    <div class="card cy"><h3>Tools in the kit</h3><p style="margin:0;color:var(--txt2);font-size:15px">THORChain, LayerZero/Stargate, USDT0 OFT, Skip:Go (identified from source: CCTPRelayer / SkipGoSwapRouter / GoFastHandler), Symbiosis, Chainflip, NEAR Intents, Umbra stealth payments (100 ETH), CoW Swap, ParaSwap, USDD, xSwap.</p></div>
-    <div class="card cy"><h3>Already frozen (not ours)</h3><p style="margin:0;color:var(--txt2);font-size:15px">Tether and Circle blacklisted <span class="addr">0xe07Bd590…7d57</span> (218,023 USDT + 99,990 USDC). Tether also froze the TRON address <span class="addr">TRzmHLa8…36Ku4</span>. Credit to whoever flagged them.</p></div>
-  </div>
-</section>
-
-<!-- 10 index -->
-<section id="index">
-  <div class="sec"><span class="num">10</span><span class="lab">Index</span></div>
-  <h2>Every laundering <em>wallet</em></h2>
-  <div class="tabs"><button class="on" data-set="wallets">ETH · 246</button><button data-set="xrp_wallets">XRP · 239</button></div>
-  <input class="search" id="q" type="search" placeholder="Search address…" aria-label="Search wallets" autocomplete="off">
-  <div class="count" id="wcount"></div>
-  <div class="wlist" id="wlist"></div>
-</section>
-
-<!-- 11 method -->
-<section id="method">
-  <div class="sec"><span class="num">11</span><span class="lab">Method</span></div>
-  <h2>How, and what we <em>don't</em> claim</h2>
-  <div class="grid2 cols">
-    <div class="did"><b>Method</b><ul>
-      <li>Ethereum: Blockscout / Etherscan labels; followed ETH and major tokens from labeled "Bitget Exploiter" wallets. Only wallets first seen after the hack count as attacker wallets. THORChain vaults and busy services were excluded.</li>
-      <li>XRP: full account_tx crawl from the Bitget XRP address; memos decoded from every THORChain deposit.</li>
-      <li>TRON: TronGrid; swap outputs read from USDT Transfer logs.</li>
-      <li>BTC: mempool.space; CoinJoin detected by structure (many equal outputs).</li>
-      <li>Affiliates: THORName registry + Midgard via public gateways.</li>
-    </ul></div>
-    <div class="not"><b>Not claimed</b><ul>
-      <li>Who owns the OKX account, or that it's the attacker rather than an intermediary.</li>
-      <li>That any interface, market maker, bridge or exchange acted knowingly.</li>
-      <li>Attribution to North Korea. That's Bitget's and TRM's assessment.</li>
-      <li>Identities behind Discord/Telegram aliases.</li>
-      <li>Final numbers. Funds were still moving at publication.</li>
-    </ul></div>
-  </div>
-</section>
-
-<!-- 12 data -->
-<section id="data">
-  <div class="sec"><span class="num">12</span><span class="lab">Evidence</span></div>
-  <h2>Download the <em>raw data</em></h2>
-  <div class="dl">
-    <a href="data/xrp_thorchain_deposits.csv" download><b>xrp_thorchain_deposits.csv</b><span>5,281 attacker XRP→THORChain deposits with memos</span></a>
-    <a href="data/xrp_hacker_wallets.txt" download><b>xrp_hacker_wallets.txt</b><span>239 fresh XRP laundering wallets</span></a>
-    <a href="data/btc_destinations_all_legs.csv" download><b>btc_destinations_all_legs.csv</b><span>120 BTC destinations, marked where both legs meet</span></a>
-    <a href="data/evidence_laundering_flow_2026-09-28.csv" download><b>eth_laundering_flow.csv</b><span>1,297 ETH-side transfers with hashes</span></a>
-    <a href="data/evidence_thorchain_to_btc.csv" download><b>eth_thorchain_to_btc.csv</b><span>288 ETH-side THORChain deposits with memos</span></a>
-    <a href="data/evidence_hacker_wallets_2026-09-28.txt" download><b>eth_hacker_wallets.txt</b><span>246 fresh ETH laundering wallets</span></a>
-  </div>
-</section>
-
 </main>
 
 <footer><div class="wrap">
-  <a class="brand" href="https://x.com/REKTCOON" target="_blank" rel="noopener"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
-  <p>Independent research from public blockchain data. Not legal or financial advice. Exchange labels come from Etherscan. Prices: Binance, 28 Sep 2026 (ETH $2,693 · XRP $1.495 · BTC $83,376). If you run a service named here and have context or corrections, DM <a href="https://x.com/REKTCOON" target="_blank" rel="noopener">@REKTCOON</a>. Corrections are published on this page.</p>
-  <p>Part 1 (27–28 Sep): the Ethereum leg, 15 BTC addresses, the 21-minute stablecoin swap. This page supersedes it.</p>
+  Independent research from public blockchain data. Not legal or financial advice. Corrections and context: <a href="https://x.com/REKTCOON" target="_blank" rel="noopener">@REKTCOON</a>.
 </div></footer>
-
-<script src="data.js"></script>
-<script>
-(function(){
-  var C=window.CASE||{}, ETH=2693, XRP=1.495;
-  var fmt=function(n,d){return Number(n).toLocaleString('en-US',{maximumFractionDigits:d||0,minimumFractionDigits:d||0})};
-  function copyBtn(t){var b=document.createElement('button');b.className='copy';b.textContent='Copy';b.onclick=function(){var ok=function(){b.textContent='Copied';b.classList.add('ok');setTimeout(function(){b.textContent='Copy';b.classList.remove('ok')},1300)};navigator.clipboard?navigator.clipboard.writeText(t).then(ok,ok):ok()};return b}
-
-  // affiliates
-  var A=[["thor18dvg…krkjm4 (no THORName)",31.93,177.4,"0.3–0.6%","fee wallet · only client: attacker","y"],["w1",9.26,53.2,"0.18–1.25%","THORName","c"],["naswap",29.52,51.7,"0.1–0.3%","THORName","c"],["t",2.89,14.5,"0.5%","THORName","c"],["thor199tl…u6jsl",13.09,13.1,"0.1%","raw address","c"],["tch",7.25,7.2,"0.1%","THORName","c"],["vi",0.91,4.6,"0.5%","THORName","c"],["ns",1.28,3.5,"0.27%","THORName","c"],["ss (ShapeShift DAO)",1.08,0.1,"0.01%","Etherscan-labeled","c"]];
-  var top=A[0][2], box=document.getElementById('aff');
-  A.forEach(function(a,i){var d=document.createElement('div');d.className='bar'+(i===0?' top':'');
-    d.innerHTML='<div class="nm">'+a[0]+'</div><div><div class="tr"><div class="fi" style="width:'+Math.max(1.5,a[2]/top*100)+'%"></div></div><div class="sub">$'+a[1].toFixed(2)+'M routed · '+a[3]+' · '+a[4]+'</div></div><div class="vl">$'+fmt(a[2],1)+'K</div>';box.appendChild(d)});
-
-  // shared BTC
-  var sb=document.querySelector('#shared tbody');
-  (C.shared_btc||[]).forEach(function(r){var tr=document.createElement('tr');
-    tr.innerHTML='<td class="addr full"><a href="https://mempool.space/address/'+r[0]+'" target="_blank" rel="noopener">'+r[0]+'</a></td><td class="num">'+fmt(r[1])+' XRP</td><td class="num">'+fmt(r[2],1)+' ETH</td><td></td>';tr.lastChild.appendChild(copyBtn(r[0]));sb.appendChild(tr)});
-
-  // unspent BTC
-  var ub=document.querySelector('#unspent tbody');
-  (C.unspent_btc||[]).forEach(function(r){var tr=document.createElement('tr');
-    tr.innerHTML='<td class="addr full"><a href="https://mempool.space/address/'+r[0]+'" target="_blank" rel="noopener">'+r[0]+'</a></td><td class="num">'+fmt(r[1],3)+' BTC</td><td></td>';tr.lastChild.appendChild(copyBtn(r[0]));ub.appendChild(tr)});
-
-  // holdings
-  var H=[["Exploiter 11","0xA6BFd7FcaF4711dA1f61D5E91d03A2c7C72dB272",10000,"g","UNTOUCHED"],["Exploiter 12","0xFd5EBe912e2061992437767e24e5BCb52a3f9e54",10000,"g","UNTOUCHED"],["Exploiter 13","0xeD5a394a7558929112848B7e97B569de6bbE1A51",10000,"g","UNTOUCHED"],["Exploiter 4","0x600cfeDc6Bd65Fa79B604dC44964f419e45784b2",9885,"r","FUNNEL · DRAINING"],["Exploiter 10","0x9FA39d62095302431d7d4167a7E80F8Ec6eA4FA0",0,"y","→ EX.4 · 28 SEP"],["Exploiter 9","0xDc2901f741B4003e32B8B752e97b8c4C1891dC63",0,"y","→ EX.4 · 28 SEP"],["Exploiter 14","0x52f08Feb1B0Da609A5442514E2Bb43C99D25d284",0,"y","→ EX.4 · 28 SEP"],["Exploiter 5","0xD2C2f029eFF5caCc686F24377CfdDcfc82d9F899",0,"y","EMPTIED 27 SEP"]];
-  var hb=document.getElementById('hold');
-  H.forEach(function(r){var tr=document.createElement('tr');
-    tr.innerHTML='<td><b>'+r[0]+'</b></td><td class="addr full"><a href="https://etherscan.io/address/'+r[1]+'" target="_blank" rel="noopener">'+r[1]+'</a></td><td class="num">'+fmt(r[2])+'</td><td class="num"><span class="pill '+r[3]+'">'+r[4]+'</span></td>';hb.appendChild(tr)});
-
-  // wallet index
-  var set='wallets', q=document.getElementById('q'), wl=document.getElementById('wlist'), wc=document.getElementById('wcount');
-  function render(){var f=(q.value||'').trim().toLowerCase(), all=C[set]||[], ex=set==='wallets'?'https://etherscan.io/address/':'https://xrpscan.com/account/';
-    var list=all.filter(function(a){return !f||a.toLowerCase().indexOf(f)>-1});
-    wl.innerHTML=list.map(function(a){return '<a href="'+ex+a+'" target="_blank" rel="noopener">'+a+'</a>'}).join('');
-    wc.textContent=list.length+' of '+all.length}
-  document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');set=b.dataset.set;render()}});
-  q.addEventListener('input',render); render();
-})();
-</script>
 </body>
 </html>
