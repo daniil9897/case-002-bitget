@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The same THORChain storefront, naswap, washed Kelp DAO (Apr), AFX Trade (Jul) and Bitget (Sep). 99% of its swaps come from these three hacks. Registered 41 hours after Kelp.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://daniil9897.github.io/case-002-bitget/part-3.html">
+<meta property="og:title" content="One laundromat, three North Korea-linked hacks">
+<meta property="og:description" content="The same THORChain storefront, naswap, washed Kelp DAO (Apr), AFX Trade (Jul) and Bitget (Sep). 99% of its swaps come from these three hacks. Registered 41 hours after Kelp.">
+<meta property="og:image" content="https://daniil9897.github.io/case-002-bitget/assets/og-part3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@REKTCOON">
+<meta name="twitter:creator" content="@REKTCOON">
+<meta name="twitter:title" content="One laundromat, three North Korea-linked hacks">
+<meta name="twitter:description" content="The same THORChain storefront, naswap, washed Kelp DAO (Apr), AFX Trade (Jul) and Bitget (Sep). 99% of its swaps come from these three hacks. Registered 41 hours after Kelp.">
+<meta name="twitter:image" content="https://daniil9897.github.io/case-002-bitget/assets/og-part3.png">
+<title>Bitget Money · Part 3</title>
+<link rel="icon" href="assets/rektcoon-avatar.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09050f; --bg2:#110822; --card:#160c2b; --card2:#1d1037; --line:#3a2466;
+  --txt:#f1ecff; --txt2:#c8bde6; --muted:#8f82b3;
+  --purple:#9b4dff; --purple2:#6a24ff; --cyan:#27e8ff; --green:#a4ff3c; --gold:#ffc83d; --red:#ff3d6e;
+  --display:"Unbounded",system-ui,sans-serif; --body:"Onest",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--body);font-size:18px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 600px at 85% -10%,rgba(155,77,255,.35),transparent 60%),
+  radial-gradient(700px 500px at -10% 30%,rgba(39,232,255,.12),transparent 60%),
+  radial-gradient(800px 600px at 50% 110%,rgba(164,255,60,.08),transparent 60%),var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.25;
+  background-image:linear-gradient(rgba(155,77,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(155,77,255,.12) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 70%)}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(39,232,255,.35)}
+a:hover{color:var(--green);border-color:var(--green)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+@media(min-width:760px){.wrap{padding:0 36px}}
+.mono{font-family:var(--mono);font-size:.82em}
+.addr{font-family:var(--mono);font-size:12.5px;word-break:break-all}
+.addr a{border:none}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(9,5,15,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;letter-spacing:.02em;border:none;color:var(--txt)}
+.brand img{width:34px;height:34px;border-radius:50%;box-shadow:0 0 0 2px var(--purple),0 0 18px var(--purple)}
+.brand span b{color:var(--green)}
+.live{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.asof{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.series{display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:12px}
+.series a{border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--txt2)}
+.series b{color:var(--cyan)}
+.prev{display:block;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:40px;background:var(--card);color:var(--txt)}
+.prev:hover{border-color:var(--cyan)}
+
+/* hero */
+.hero{position:relative;margin-top:22px;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(155,77,255,.6);min-height:clamp(420px,42vw,520px);display:flex;align-items:center}
+.hero img.banner{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 50%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,5,15,.95) 0%,rgba(9,5,15,.85) 45%,rgba(9,5,15,.15) 78%)}
+.hero .hcopy{position:relative;padding:clamp(20px,4vw,52px);max-width:min(700px,62%)}
+.tag{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--green);padding:5px 10px;border-radius:999px;max-width:100%;font-weight:800}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.9vw,52px);line-height:1.02;margin:14px 0 14px;letter-spacing:-.02em;text-transform:uppercase;overflow-wrap:anywhere}
+h1 .g{color:var(--gold);text-shadow:0 0 24px rgba(255,200,61,.45)}
+h1 .c{color:var(--cyan);text-shadow:0 0 24px rgba(39,232,255,.45)}
+.dek{font-family:var(--body);text-transform:none;letter-spacing:0;color:var(--txt2);font-size:clamp(15px,1.5vw,19px);line-height:1.55;max-width:46ch;margin:0}
+@media(max-width:760px){
+  .hero{align-items:flex-end;min-height:640px}
+  .hero img.banner{object-position:80% 0%;height:62%;top:0;bottom:auto}
+  .hero .shade{background:linear-gradient(180deg,rgba(9,5,15,0) 0%,rgba(9,5,15,.7) 40%,rgba(9,5,15,1) 62%)}
+  .hero .hcopy{max-width:100%}
+}
+.byline{display:flex;align-items:center;gap:12px;margin:18px 0 0;font-family:var(--mono);font-size:12px;color:var(--txt2)}
+.byline img{width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 2px var(--cyan)}
+
+/* ticker */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 8px}
+@media(min-width:900px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stat{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:18px}
+.stat .n{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.6vw,42px);line-height:1}
+.stat .l{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:10px}
+.n.g{color:var(--gold)} .n.c{color:var(--cyan)} .n.gr{color:var(--green)} .n.r{color:var(--red)}
+
+/* sections */
+section{padding:56px 0 8px}
+.sec{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+.sec .num{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,54px);color:transparent;-webkit-text-stroke:1.5px var(--purple);line-height:1}
+.sec .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.6vw,40px);line-height:1.1;margin:0 0 16px;letter-spacing:-.01em}
+h2 em{font-style:normal;color:var(--green)}
+.prose{max-width:70ch;color:var(--txt2);overflow-wrap:anywhere}
+.prose p{margin:0 0 1em}
+.prose b,.prose strong{color:var(--txt)}
+.hl{color:var(--bg);background:var(--gold);padding:0 6px;border-radius:4px;font-weight:700}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:20px;margin:20px 0}
+.card.glow{border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,200,61,.25),0 20px 60px -20px rgba(255,200,61,.35)}
+.card.cy{border-color:var(--cyan);box-shadow:0 20px 60px -25px rgba(39,232,255,.4)}
+.card h3{margin:0 0 10px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.card.cy h3{color:var(--cyan)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media(min-width:900px){.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.grid3{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+@media(min-width:900px){.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.mini .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.mini .v{font-family:var(--display);font-weight:700;font-size:22px;margin-top:6px}
+.mini p{margin:8px 0 0;font-size:15px;color:var(--txt2)}
+
+/* chain */
+.chain{display:flex;flex-direction:column;gap:0;margin:16px 0}
+.step{position:relative;padding:14px 16px 14px 52px;border-left:2px dashed var(--line);margin-left:18px}
+.step:last-child{border-left-color:transparent}
+.step .dot{position:absolute;left:-19px;top:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:14px;background:var(--card2);border:2px solid var(--purple);color:var(--purple)}
+.step.hot .dot{border-color:var(--gold);color:var(--gold);box-shadow:0 0 18px rgba(255,200,61,.5)}
+.step .t{font-weight:700}
+.step .d{color:var(--txt2);font-size:15px}
+
+/* tables */
+.tw{overflow-x:auto;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-weight:600}
+td{padding:10px 8px;border-bottom:1px solid rgba(58,36,102,.5);vertical-align:middle}
+td.num,th.num{text-align:right;font-family:var(--mono);white-space:nowrap}
+tr.top td{background:rgba(255,200,61,.07)}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.pill.g{color:var(--green);border-color:rgba(164,255,60,.4)} .pill.r{color:var(--red);border-color:rgba(255,61,110,.4)} .pill.c{color:var(--cyan);border-color:rgba(39,232,255,.4)} .pill.y{color:var(--gold);border-color:rgba(255,200,61,.4)}
+.copy{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;background:transparent;color:var(--cyan);border:1px solid rgba(39,232,255,.4);border-radius:8px;padding:4px 8px;cursor:pointer}
+.copy:hover{background:var(--cyan);color:var(--bg)}
+.copy.ok{background:var(--green);border-color:var(--green);color:var(--bg)}
+@media(max-width:700px){
+  table.stack thead{display:none}
+  table.stack tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:12px 0;border-bottom:1px solid var(--line)}
+  table.stack td{border:none;padding:0}
+  table.stack td.num{text-align:left}
+  table.stack td.full{grid-column:1/-1}
+}
+
+/* bars */
+.bar{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;margin-bottom:14px}
+@media(min-width:760px){.bar{grid-template-columns:190px minmax(0,1fr) 90px;align-items:center;gap:14px}}
+.bar .nm{font-family:var(--mono);font-size:13px;font-weight:600}
+.bar .tr{height:22px;background:rgba(155,77,255,.12);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.bar .fi{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--purple2),var(--purple));transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
+.bar.top .fi{background:linear-gradient(90deg,#ff9f1c,var(--gold))}
+.bar .vl{font-family:var(--mono);font-size:13px;text-align:right}
+.bar .sub{font-family:var(--mono);font-size:11px;color:var(--muted)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* flow svg */
+.flow{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--card);padding:10px}
+.flow svg{display:block;width:100%;min-width:760px;height:auto}
+.flow text{font-family:var(--mono);fill:var(--txt)}
+.flow .s{font-size:10px;fill:var(--muted)}
+.flow .bx{fill:var(--card2);stroke:var(--line);stroke-width:1.5;rx:10}
+.flow .bx.p{stroke:var(--purple)} .flow .bx.y{stroke:var(--gold)} .flow .bx.c{stroke:var(--cyan)} .flow .bx.g{stroke:var(--green)}
+.flow .ln{fill:none;stroke-opacity:.8}
+.flow .dash{stroke-dasharray:6 6;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+
+/* search list */
+.search{width:100%;font-family:var(--mono);font-size:14px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);margin:12px 0 8px}
+.search:focus{outline:2px solid var(--cyan)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--txt2);border-radius:999px;padding:6px 12px;cursor:pointer}
+.tabs button.on{background:var(--purple);border-color:var(--purple);color:#fff}
+.wlist{display:grid;grid-template-columns:minmax(0,1fr);column-gap:24px;font-family:var(--mono);font-size:12px;line-height:2;max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card)}
+@media(min-width:760px){.wlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.wlist a{border:none;color:var(--txt2);word-break:break-all}
+.wlist a:hover{color:var(--green)}
+.count{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.dl{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media(min-width:760px){.dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dl a{display:block;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--card);color:var(--txt)}
+.dl a:hover{border-color:var(--green);box-shadow:0 0 24px -6px var(--green)}
+.dl b{display:block;font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.dl span{font-size:13px;color:var(--muted)}
+
+.not{border-left:3px solid var(--red);padding-left:14px}
+.did{border-left:3px solid var(--green);padding-left:14px}
+.cols ul{margin:8px 0 0;padding-left:18px;color:var(--txt2);font-size:15px}
+.cols li{margin-bottom:6px}
+.quote{border-left:3px solid var(--cyan);padding:6px 0 6px 16px;margin:18px 0;color:var(--txt);font-style:italic}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:30px 0 60px;font-size:13px;color:var(--muted)}
+footer .brand{margin-bottom:10px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<style>
+.tl2{list-style:none;margin:16px 0;padding:0;border-left:2px solid var(--line)}
+.tl2 li{position:relative;padding:0 0 18px 22px}
+.tl2 li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--purple)}
+.tl2 li.k::before{background:var(--red);box-shadow:0 0 12px var(--red)}
+.tl2 li.y::before{background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.tl2 time{font-family:var(--mono);font-size:12px;color:var(--cyan);display:block}
+.big3{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:18px 0}
+@media(min-width:900px){.big3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.hk{border-radius:16px;padding:18px;border:1px solid var(--line);background:linear-gradient(160deg,var(--card2),var(--card))}
+.hk .w{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hk .t{font-family:var(--display);font-weight:900;font-size:24px;margin:6px 0}
+.hk .s{font-size:14px;color:var(--txt2)}
+.meter{height:26px;border-radius:999px;overflow:hidden;display:flex;border:1px solid var(--line);margin:14px 0 6px}
+.meter span{display:block;height:100%}
+</style>
+</head>
+<body>
+<div class="nav"><div class="wrap">
+  <a class="brand" href="./"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
+  <span class="series"><a href="part-2.html">← Part 2</a><b>PART 3 of 3</b></span>
+  <span class="live"><i></i>live · funds moving</span>
+  <span class="asof">Updated 29 Sep 2026 · 19:00 UTC</span>
+</div></div>
+
+<main class="wrap">
+<header class="hero">
+  <img class="banner" src="assets/rektcoon-banner.webp" alt="">
+  <div class="shade"></div>
+  <div class="hcopy">
+    <span class="tag">⚡ Part 3 · The North Korea link</span>
+    <h1>One <span class="g">laundromat</span>. Three <span class="c">North Korea</span>-linked hacks.</h1>
+    <p class="dek">The THORChain storefront that washed Bitget's money was born 41 hours after the Kelp DAO hack. It later washed AFX Trade too. 99% of everything it ever swapped comes from these three thefts.</p>
+    <div class="byline"><img src="assets/rektcoon-avatar.webp" alt=""><span>by <a href="https://x.com/REKTCOON" target="_blank" rel="noopener">@REKTCOON</a> · on-chain only · every claim links to data</span></div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="n g">99%</div><div class="l">of naswap swaps come from Kelp DAO, AFX Trade and Bitget</div></div>
+  <div class="stat"><div class="n c">41 hours</div><div class="l">from the Kelp DAO hack to naswap's registration</div></div>
+  <div class="stat"><div class="n gr">$49.6M</div><div class="l">stolen funds swapped through naswap</div></div>
+  <div class="stat"><div class="n r">0 ETH</div><div class="l">left in Bitget attacker storage as of 29 Sep</div></div>
+</div>
+
+<section id="found">
+  <div class="sec"><span class="num">01</span><span class="lab">The finding</span></div>
+  <h2>naswap: the swap storefront built for <em>stolen money</em></h2>
+  <div class="prose">
+    <p>In Part 2 we showed that every THORChain swap memo names an <b>affiliate</b>, the interface that routed it. One registered name kept showing up in the Bitget attacker's swaps: <b>naswap</b>. Across its whole history it routed <b>1,803 swaps</b> from only <b>24 senders</b>.</p>
+    <p>We classified every one of them. <b>1,787 swaps (99%) and $49.6M of $50.5M (98%)</b> came from wallets belonging to three hacks. Two of them, Kelp DAO and AFX Trade, were publicly attributed to North Korea's <b>TraderTraitor</b> group before Bitget ever happened. The remaining 16 small swaps ($0.87M) include the operator's own test transactions.</p>
+  </div>
+  <div class="meter" aria-label="naswap volume by source"><span style="width:71.6%;background:var(--cyan)"></span><span style="width:25%;background:var(--purple)"></span><span style="width:1.7%;background:var(--gold)"></span><span style="width:1.7%;background:var(--muted)"></span></div>
+  <p class="mono" style="color:var(--muted)"><span style="color:var(--cyan)">■</span> Bitget $36.2M · <span style="color:var(--purple)">■</span> Kelp DAO $12.6M · <span style="color:var(--gold)">■</span> AFX Trade $0.86M · <span style="color:var(--muted)">■</span> unclassified $0.87M</p>
+  <div class="big3">
+    <div class="hk"><div class="w">April 2026 · Kelp DAO</div><div class="t" style="color:var(--purple)">228 swaps</div><div class="s">From wallets Etherscan labels <b>Kelp DAO Exploiter 20, 21, 34</b>. Every one of their THORChain swaps used naswap and nothing else. LayerZero attributes the hack to TraderTraitor (Lazarus).</div></div>
+    <div class="hk"><div class="w">July 2026 · AFX Trade</div><div class="t" style="color:var(--gold)">13 swaps</div><div class="s">From <span class="addr">0x678335b4…6d14</span>, funded with 871 ETH by <b>AFX Trade Exploiter 9</b>. AFX attributes its $24M hack to UNC4899 / TraderTraitor.</div></div>
+    <div class="hk"><div class="w">September 2026 · Bitget</div><div class="t" style="color:var(--cyan)">1,546 swaps</div><div class="s">From the attacker's XRP and ETH laundering wallets traced in Part 2, 26–28 Sep.</div></div>
+  </div>
+</section>
+
+<section id="birth">
+  <div class="sec"><span class="num">02</span><span class="lab">Timeline</span></div>
+  <h2>Registered <em>41 hours</em> after Kelp DAO</h2>
+  <ul class="tl2">
+    <li class="k"><time>18 Apr 2026 · 17:35 UTC</time>Kelp DAO's LayerZero bridge is exploited for ~$292M.</li>
+    <li><time>20 Apr · 10:20</time>The future owner wallet is seeded with 0.009 BTC assembled from 11 small inputs in power-of-two amounts (262,144 and 16,384 sats), a denomination pattern typical of CoinJoin outputs.</li>
+    <li><time>20 Apr · 10:39</time>BTC swapped to 1,601 RUNE → <span class="addr">thor148sahwr5pg44cy0n23zwc723ugy2fptw0m8sau</span>.</li>
+    <li class="y"><time>20 Apr · 10:55</time>That wallet registers the THORName <b>"naswap"</b>.</li>
+    <li><time>20 Apr · 12:19–13:31</time>Test swaps back and forth through its own wallets (<span class="addr">0xcdd505c7…bc34</span>, <span class="addr">bc1qa6qz0y…67m7</span>).</li>
+    <li class="k"><time>21 Apr 12:19 → 22 Apr 18:07</time>Kelp DAO exploiter wallets swap ~4,950 ETH to BTC through naswap.</li>
+    <li class="k"><time>25 Jul 2026</time>AFX Trade proceeds (via 0x678335b4…) swap ETH to BTC through naswap.</li>
+    <li class="k"><time>26–28 Sep 2026</time>Bitget proceeds: 1,546 swaps through naswap.</li>
+  </ul>
+</section>
+
+<section id="shared">
+  <div class="sec"><span class="num">03</span><span class="lab">Hard link</span></div>
+  <h2>One Bitcoin address, <em>two hacks</em></h2>
+  <div class="card glow">
+    <h3>bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt</h3>
+    <div class="grid2">
+      <div><b style="color:var(--gold)">25 Jul 2026 · AFX Trade</b><p style="margin:6px 0 0;color:var(--txt2);font-size:15px">13 naswap swaps from 0x678335b4… (funded by AFX Trade Exploiter 9) pay out BTC to this address.</p></div>
+      <div><b style="color:var(--cyan)">26 Sep 2026 · Bitget</b><p style="margin:6px 0 0;color:var(--txt2);font-size:15px">Bitget attacker XRP wallet rsiNZr8amajbBCQiWxeis8PJ5fptkGePNz swaps 9,999 XRP → 0.18 BTC to the same address.</p></div>
+    </div>
+    <p style="margin:12px 0 0;font-size:14px;color:var(--txt2)">A THORChain memo names the destination explicitly, so the same person or service asked for payouts from both thefts to go to one address. <a href="https://mempool.space/address/bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt" target="_blank" rel="noopener">mempool.space ↗</a></p>
+  </div>
+</section>
+
+<section id="fees">
+  <div class="sec"><span class="num">04</span><span class="lab">Follow the fees</span></div>
+  <h2>The storefront is still <em>collecting</em></h2>
+  <div class="grid2">
+    <div class="card cy"><h3>naswap fee wallet</h3><p style="margin:0;color:var(--txt2);font-size:15px"><span class="addr">thor148sahwr…m8sau</span> declared ~$80.8K in fees across all three hacks. It holds <b>138,320 RUNE</b> (~$108K) and has never cashed out. On 27 Sep it tried to deposit 49,654 RUNE as liquidity into THORChain's BTC pool (memo <span class="mono">+:BTC.BTC</span>); it failed only because BTC deposits were paused.</p></div>
+    <div class="card cy"><h3>The other fee wallet → OKX</h3><p style="margin:0;color:var(--txt2);font-size:15px">From Part 2: <span class="addr">thor18dvg…krkjm4</span>, whose only customer was the Bitget attacker, cashed out 131,982 USDT to an OKX deposit address. After our report, Bitget's own tracker now lists that address as an exchange deposit endpoint holding the same 131,981.53 USDT.</p></div>
+  </div>
+</section>
+
+<section id="live">
+  <div class="sec"><span class="num">05</span><span class="lab">Live · 29 Sep</span></div>
+  <h2>Storage empty. <em>Zcash</em> is moving.</h2>
+  <div class="grid3">
+    <div class="mini"><div class="k">Ethereum</div><div class="v">0 ETH in storage</div><p>The last storage wallets were relayed and drained on 29 Sep: Exploiter 11 → Exploiter 4 at 01:14 UTC, then Exploiters 4, 12 and 13 sprayed out through the same intermediates as before (0xf7bC…96C3, 0x4a77…d330). The last transfer was at 15:53 UTC.</p></div>
+    <div class="mini"><div class="k">Zcash</div><div class="v">18,581 ZEC left</div><p>About $26M still sits on <span class="addr">t1WgMdtND8…kMDVG</span>. On 29 Sep it started moving again (16:05–18:32 UTC) in 1–44 ZEC pieces through fresh transparent addresses that empty immediately, which fits deposits into the shielded pool.</p></div>
+    <div class="mini"><div class="k">THORChain</div><div class="v">naswap: +42K RUNE/day</div><p>The fee wallet grew from 95,915 to 138,320 RUNE in 24 hours. The laundering hasn't slowed down.</p></div>
+  </div>
+</section>
+
+<section id="context">
+  <div class="sec"><span class="num">06</span><span class="lab">Where things stand</span></div>
+  <h2>The public <em>picture</em></h2>
+  <div class="prose">
+    <p><b>Bitget's own tracker</b> counts $375M of the $387.5M as still held in attacker-controlled addresses (mostly BTC after swaps), $632.7K frozen (NEAR Intents, Tether, Circle), and 1,049 attacker addresses. <b>Elliptic</b> says the hack pushes North Korea's 2026 crypto haul past $1 billion. <b>OKX founder Star Xu</b> publicly questioned THORChain's decentralization after it refused to block the attacker. Bitget resumed BTC withdrawals on 28 Sep and ETH on 29 Sep.</p>
+    <p>Until now the North Korea link rested on Bitget's IP analysis and on TRM's wallet overlaps. This page adds a public, verifiable one: <b>the Bitget launderers used the same dedicated swap storefront, and in one case the same Bitcoin payout address, as two hacks already attributed to TraderTraitor.</b></p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="sec"><span class="num">07</span><span class="lab">Method</span></div>
+  <h2>How, and what we <em>don't</em> claim</h2>
+  <div class="grid2 cols">
+    <div class="did"><b>Method</b><ul>
+      <li>All swaps with affiliate "naswap" pulled from THORChain Midgard; senders matched against our traced Bitget wallets (Part 2) and Etherscan labels (Kelp DAO Exploiter 20/21/34, AFX Trade Exploiter 9).</li>
+      <li>THORName registration and first funding from Midgard / THORNode.</li>
+      <li>BTC destinations read from swap memos; shared address checked on mempool.space.</li>
+      <li>Zcash via Blockchair; ETH via Blockscout / Etherscan; balances as of 29 Sep 18:54 UTC.</li>
+      <li>OFAC SDN digital-currency addresses: no overlap with our ~650 addresses (they're fresh, so this was expected).</li>
+    </ul></div>
+    <div class="not"><b>Not claimed</b><ul>
+      <li>Who operates naswap. We name no person.</li>
+      <li>That THORChain, its node operators or any other interface acted knowingly.</li>
+      <li>Formal attribution. Kelp DAO (LayerZero) and AFX (AFX / Mandiant-tracked) attributions are theirs; Bitget's is Bitget's and TRM's. We show shared infrastructure.</li>
+      <li>That the power-of-two seed inputs prove a specific mixer. They fit a CoinJoin denomination pattern.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="sec"><span class="num">08</span><span class="lab">Evidence</span></div>
+  <h2>Download the <em>raw data</em></h2>
+  <div class="dl">
+    <a href="data/naswap_swaps.csv" download><b>naswap_swaps.csv</b><span>All 1,803 naswap swaps, each tagged Bitget / Kelp DAO / AFX Trade / unclassified, with memo and THORChain tx</span></a>
+    <a href="https://gateway.liquify.com/chain/thorchain_midgard/v2/actions?affiliate=naswap" target="_blank" rel="noopener"><b>Midgard: affiliate=naswap ↗</b><span>Verify the full list yourself</span></a>
+    <a href="https://gateway.liquify.com/chain/thorchain_api/thorchain/thorname/naswap" target="_blank" rel="noopener"><b>THORName record ↗</b><span>Owner thor148sahwr…m8sau</span></a>
+    <a href="part-2.html"><b>Part 2 evidence</b><span>XRP deposits, 485 wallets, BTC destinations, OKX trail</span></a>
+  </div>
+  <a class="prev" href="part-2.html"><div class="mono" style="color:var(--green);letter-spacing:.12em">← PREVIOUSLY · PART 2</div><div style="font-family:var(--display);font-weight:900;font-size:clamp(18px,2.6vw,28px);margin-top:8px">The launderers took a cut. Then cashed it out to OKX.</div></a>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <a class="brand" href="./"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
+  <p>Independent research from public blockchain data. Not legal or financial advice. Prices 29 Sep 2026: ETH $2,697 · ZEC ~$1,420–1,470 · RUNE ~$0.78. Corrections: DM <a href="https://x.com/REKTCOON" target="_blank" rel="noopener">@REKTCOON</a>.</p>
+</div></footer>
+</body></html>
