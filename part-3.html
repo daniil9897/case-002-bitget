@@ -216,7 +216,7 @@ footer .brand{margin-bottom:10px}
   <a class="brand" href="./"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
   <span class="series"><a href="part-2.html">← Part 2</a><b>PART 3 of 3</b></span>
   <span class="live"><i></i>live · funds moving</span>
-  <span class="asof">Updated 29 Sep 2026 · 19:00 UTC</span>
+  <span class="asof">Updated 30 Sep 2026 · 04:00 UTC</span>
 </div></div>
 
 <main class="wrap">
@@ -261,10 +261,11 @@ footer .brand{margin-bottom:10px}
     <li class="k"><time>18 Apr 2026 · 17:35 UTC</time>Kelp DAO's LayerZero bridge is exploited for ~$292M.</li>
     <li><time>20 Apr · 10:20</time>The future owner wallet is seeded with 0.009 BTC assembled from 11 small inputs in power-of-two amounts (262,144 and 16,384 sats), a denomination pattern typical of CoinJoin outputs.</li>
     <li><time>20 Apr · 10:39</time>BTC swapped to 1,601 RUNE → <span class="addr">thor148sahwr5pg44cy0n23zwc723ugy2fptw0m8sau</span>.</li>
-    <li class="y"><time>20 Apr · 10:55</time>That wallet registers the THORName <b>"naswap"</b>.</li>
+    <li class="y"><time>20 Apr · 10:55</time>That wallet registers the THORName <b>"naswap"</b>. The same day, the website <b>naswap.io</b> gets its first TLS certificate.</li>
     <li><time>20 Apr · 12:19–13:31</time>Test swaps back and forth through its own wallets (<span class="addr">0xcdd505c7…bc34</span>, <span class="addr">bc1qa6qz0y…67m7</span>).</li>
     <li class="k"><time>21 Apr 12:19 → 22 Apr 18:07</time>Kelp DAO exploiter wallets swap ~4,950 ETH to BTC through naswap.</li>
     <li class="k"><time>25 Jul 2026</time>AFX Trade proceeds (via 0x678335b4…) swap ETH to BTC through naswap.</li>
+    <li><time>31 Aug 2026</time>naswap.io code rebuilt (BUILD_TIME 2026-08-31 16:00): three routes, ETH→BTC, XRP→BTC, XRP→ETH.</li>
     <li class="k"><time>26–28 Sep 2026</time>Bitget proceeds: 1,546 swaps through naswap.</li>
   </ul>
 </section>
@@ -301,8 +302,29 @@ footer .brand{margin-bottom:10px}
   </div>
 </section>
 
+<section id="website">
+  <div class="sec"><span class="num">06</span><span class="lab">Off-chain</span></div>
+  <h2>The laundromat has a <em>storefront</em></h2>
+  <div class="prose"><p>naswap isn't only a name in swap memos. It is a live website, <b>naswap.io</b>, with a Chinese/English interface built on THORChain. It offers exactly three routes: <b>ETH → BTC, XRP → BTC and XRP → ETH</b>, the same routes the Bitget, Kelp DAO and AFX Trade funds took.</p></div>
+  <div class="grid2">
+    <div class="card cy" style="padding:10px"><img src="assets/naswap-io.png" alt="Screenshot of naswap.io showing ETH→BTC, XRP→BTC and XRP→ETH swap tabs" style="width:100%;border-radius:12px;display:block"><p class="mono" style="font-size:11px;color:var(--muted);margin:8px 4px 0">naswap.io · captured 30 Sep 2026 without interacting</p></div>
+    <div class="card glow"><h3>What its own code says</h3>
+      <ul style="margin:0;padding-left:18px;color:var(--txt2);font-size:15px">
+        <li><span class="mono">AFFILIATE_NAME = 'naswap'</span>, the same THORName in the laundering memos</li>
+        <li><span class="mono">AFFILIATE_FEE_BPS = 30</span> (0.3%), the fee seen on most naswap swaps</li>
+        <li>A <b>vip.naswap.io</b> mirror where the fee is <b>0</b>, which explains the zero-fee naswap swaps</li>
+        <li>An in-page <b>XRP wallet unlock by seed phrase</b> ("use only a dedicated small wallet") that lets one operator drive many XRP wallets</li>
+        <li>Libraries loaded via <span class="mono">cdn.jsdmirror.com</span>, a jsDelivr mirror used for access from mainland China; Chinese is the first language option</li>
+        <li><span class="mono">BUILD_TIME = '2026-08-31 16:00'</span>, 24 days before the Bitget hack</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card cy"><h3>Born the same day as the on-chain name</h3><p style="margin:0;color:var(--txt2);font-size:15px">Certificate Transparency logs show the <b>first TLS certificates for naswap.io were issued on 20 Apr 2026</b>, the same day the THORName "naswap" was registered, 41 hours after the Kelp DAO hack. The website and the on-chain affiliate were launched together. <a href="https://crt.sh/?q=naswap.io" target="_blank" rel="noopener">crt.sh ↗</a> · <a href="data/crtsh_naswap.io.json" download>certificate log (JSON)</a></p></div>
+  <p class="mono" style="color:var(--muted);font-size:12px">We don't link to the site to avoid sending traffic. It asks users to paste wallet seed phrases; don't. The page is served through Cloudflare. Archived copy SHA-256: 675af8fb…408e84a6.</p>
+</section>
+
 <section id="context">
-  <div class="sec"><span class="num">06</span><span class="lab">Where things stand</span></div>
+  <div class="sec"><span class="num">07</span><span class="lab">Where things stand</span></div>
   <h2>The public <em>picture</em></h2>
   <div class="prose">
     <p><b>Bitget's own tracker</b> counts $375M of the $387.5M as still held in attacker-controlled addresses (mostly BTC after swaps), $632.7K frozen (NEAR Intents, Tether, Circle), and 1,049 attacker addresses. <b>Elliptic</b> says the hack pushes North Korea's 2026 crypto haul past $1 billion. <b>OKX founder Star Xu</b> publicly questioned THORChain's decentralization after it refused to block the attacker. Bitget resumed BTC withdrawals on 28 Sep and ETH on 29 Sep.</p>
@@ -311,18 +333,18 @@ footer .brand{margin-bottom:10px}
 </section>
 
 <section id="method">
-  <div class="sec"><span class="num">07</span><span class="lab">Method</span></div>
+  <div class="sec"><span class="num">08</span><span class="lab">Method</span></div>
   <h2>How, and what we <em>don't</em> claim</h2>
   <div class="grid2 cols">
     <div class="did"><b>Method</b><ul>
       <li>All swaps with affiliate "naswap" pulled from THORChain Midgard; senders matched against our traced Bitget wallets (Part 2) and Etherscan labels (Kelp DAO Exploiter 20/21/34, AFX Trade Exploiter 9).</li>
-      <li>THORName registration and first funding from Midgard / THORNode.</li>
+      <li>THORName registration and first funding from Midgard / THORNode.</li><li>naswap.io: public HTML and JavaScript read without interacting; certificate history from crt.sh.</li>
       <li>BTC destinations read from swap memos; shared address checked on mempool.space.</li>
       <li>Zcash via Blockchair; ETH via Blockscout / Etherscan; balances as of 29 Sep 18:54 UTC.</li>
       <li>OFAC SDN digital-currency addresses: no overlap with our ~650 addresses (they're fresh, so this was expected).</li>
     </ul></div>
     <div class="not"><b>Not claimed</b><ul>
-      <li>Who operates naswap. We name no person.</li>
+      <li>Who operates naswap or naswap.io. We name no person.</li>
       <li>That THORChain, its node operators or any other interface acted knowingly.</li>
       <li>Formal attribution. Kelp DAO (LayerZero) and AFX (AFX / Mandiant-tracked) attributions are theirs; Bitget's is Bitget's and TRM's. We show shared infrastructure.</li>
       <li>That the power-of-two seed inputs prove a specific mixer. They fit a CoinJoin denomination pattern.</li>
@@ -331,7 +353,7 @@ footer .brand{margin-bottom:10px}
 </section>
 
 <section id="data">
-  <div class="sec"><span class="num">08</span><span class="lab">Evidence</span></div>
+  <div class="sec"><span class="num">09</span><span class="lab">Evidence</span></div>
   <h2>Download the <em>raw data</em></h2>
   <div class="dl">
     <a href="data/naswap_swaps.csv" download><b>naswap_swaps.csv</b><span>All 1,803 naswap swaps, each tagged Bitget / Kelp DAO / AFX Trade / unclassified, with memo and THORChain tx</span></a>
