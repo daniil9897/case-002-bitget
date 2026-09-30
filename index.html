@@ -227,6 +227,87 @@ footer .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
 @media(min-width:760px){footer .grid{grid-template-columns:1.2fr 1fr 1fr}}
 footer h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt2);margin:0 0 8px}
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+/* CASE FILE BAR */
+.casebar{border-bottom:1px solid var(--line);background:repeating-linear-gradient(135deg,rgba(255,200,61,.06) 0 12px,transparent 12px 24px),#0b0616}
+.casebar .wrap{display:flex;gap:6px 20px;flex-wrap:wrap;align-items:center;padding-top:7px;padding-bottom:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.casebar b{color:var(--txt);font-weight:600}
+.casebar .live{color:var(--red);font-weight:800;display:inline-flex;gap:6px;align-items:center}
+.casebar .live i{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1s infinite}
+.casebar .clock{color:var(--gold)}
+@media(max-width:760px){.casebar .opt{display:none}.bigstamp{font-size:11px;padding:6px 10px;border-width:2px}}
+
+/* STAMPS */
+.bigstamp{position:absolute;right:clamp(14px,4vw,48px);top:clamp(14px,4vw,40px);z-index:2;font-family:var(--display);font-weight:900;font-size:clamp(13px,1.6vw,20px);letter-spacing:.14em;color:var(--red);border:3px solid var(--red);border-radius:10px;padding:8px 14px;transform:rotate(-8deg);text-transform:uppercase;text-shadow:0 0 18px rgba(255,61,110,.5);box-shadow:0 0 22px rgba(255,61,110,.25),inset 0 0 18px rgba(255,61,110,.15);background:rgba(7,4,13,.35);mix-blend-mode:screen;opacity:.92}
+.bigstamp small{display:block;font-family:var(--mono);font-size:.55em;letter-spacing:.2em;font-weight:600;text-align:center}
+.st{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:5px;border:1.5px solid currentColor}
+.st.ver{color:var(--green)} .st.lead{color:var(--gold)} .st.watch{color:var(--cyan)} .st.filed{color:var(--purple)} .st.open{color:var(--red)} .st.done{color:var(--muted)}
+
+/* BRIEF */
+.folder{position:relative;margin-top:16px;background:linear-gradient(170deg,#1b1030,#120a22);border:1px solid var(--line2);border-radius:4px 22px 22px 22px;padding:clamp(18px,3vw,32px)}
+.folder::before{content:"FILE 002";position:absolute;left:-1px;top:-30px;height:30px;padding:0 18px;display:flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold);background:#1b1030;border:1px solid var(--line2);border-bottom:none;border-radius:12px 12px 0 0}
+.brief{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+@media(min-width:760px){.brief{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:34px}}
+.brief .f{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px dashed var(--line2);font-size:14.5px}
+.brief .f .k{padding-top:3px}
+.brief .f span:last-child{color:var(--txt)}
+@media(max-width:520px){.brief .f{grid-template-columns:minmax(0,1fr);gap:2px}}
+.redact{display:inline-block;background:var(--txt);color:transparent;border-radius:2px;padding:0 4px;user-select:none;margin-right:6px}
+.brief .note{grid-column:1/-1;margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* CASE LOG */
+.term{background:#05030a;border:1px solid var(--line2);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -40px rgba(164,255,60,.35)}
+.term .bar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:#0d0818;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:var(--line2)}
+.term .bar i:nth-child(1){background:var(--red)} .term .bar i:nth-child(2){background:var(--gold)} .term .bar i:nth-child(3){background:var(--green)}
+.term .bar span{margin-left:8px}
+.log{list-style:none;margin:0;padding:12px 0;font-family:var(--mono);font-size:12.5px;line-height:1.55}
+.log li{display:grid;grid-template-columns:118px 92px minmax(0,1fr);gap:12px;padding:6px 16px;border-left:3px solid transparent}
+.log li:hover{background:rgba(155,77,255,.08);border-left-color:var(--purple)}
+.log time{color:var(--muted)}
+.log .ty{font-weight:800}
+.log .ty.inc{color:var(--red)} .log .ty.fnd{color:var(--gold)} .log .ty.fil{color:var(--purple)} .log .ty.pub{color:var(--cyan)} .log .ty.chk{color:var(--green)} .log .ty.chn{color:var(--orange)}
+.log span:last-child{color:var(--txt2)}
+.log b{color:var(--txt);font-weight:600}
+.log li.more{display:none}
+.term.all .log li.more{display:grid}
+.log.cur{padding:0 16px 14px;color:var(--green)}
+.log.cur::after{content:"▋";animation:blink 1s steps(1) infinite;margin-left:4px}
+.term .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.term .foot button{font:inherit;color:var(--cyan);background:none;border:1px solid var(--line2);border-radius:999px;padding:5px 12px;cursor:pointer}
+@media(max-width:620px){.log li{grid-template-columns:minmax(0,1fr);gap:0;padding:8px 16px}.log time{font-size:11px}}
+
+/* LEADS */
+.leads{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media(min-width:760px){.leads{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lead-c{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 14px;overflow:hidden}
+.lead-c::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lc,var(--purple))}
+.lead-c .top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.lead-c .id{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.lead-c h3{font-family:var(--display);font-size:16px;line-height:1.25;margin:8px 0 6px}
+.lead-c p{margin:0;font-size:14px;color:var(--txt2)}
+.lead-c .meta{margin-top:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lead-c .meta b{color:var(--txt);font-weight:600}
+.lead-c .prog{margin-top:10px;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.lead-c .prog i{display:block;height:100%;background:var(--lc,var(--purple));box-shadow:0 0 10px var(--lc,var(--purple))}
+.legend2{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px;font-size:12.5px;color:var(--muted);align-items:center}
+
+/* LOCKER */
+.locker{width:100%;border-collapse:collapse;font-size:13.5px}
+.locker th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line2)}
+.locker td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.locker td:first-child{font-family:var(--mono);color:var(--gold);white-space:nowrap;font-weight:800}
+.locker .h{font-family:var(--mono);font-size:11px;color:var(--muted);word-break:break-all;cursor:copy}
+.locker .h:hover{color:var(--cyan)}
+.locker small{color:var(--muted)}
+@media(max-width:760px){.locker thead{display:none}.locker tr{display:grid;grid-template-columns:minmax(0,1fr);padding:10px 0;border-bottom:1px solid var(--line)}.locker td{border:none;padding:3px 0}}
+
+/* BOARD extras */
+.ev .exh{position:absolute;bottom:10px;right:10px;font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.ev .st{margin-top:8px}
+.dossier .hd{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dossier .exh{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
+.eof{margin-top:70px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted)}
+.eof b{color:var(--red)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -237,9 +318,17 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 <div class="nav"><div class="wrap">
   <a class="brand" href="./"><img src="assets/rektcoon-avatar.webp" alt=""><span>REKT<b>COON</b></span></a>
   <nav class="links">
-    <a href="#story">60 seconds</a><a href="#map">Money map</a><a href="#board">Evidence</a><a href="#timeline">Timeline</a><a href="#learn">How laundering works</a><a href="#parts">Parts</a>
+    <a href="#brief">Case file</a><a href="#log">Case log</a><a href="#map">Money map</a><a href="#board">Evidence</a><a href="#leads">Open leads</a><a href="#timeline">Timeline</a><a href="#locker">Locker</a><a href="#parts">Parts</a>
     <a class="cta" href="https://x.com/REKTCOON" target="_blank" rel="noopener">Follow on X ↗</a>
   </nav>
+</div></div>
+<div class="casebar"><div class="wrap">
+  <span>Case file <b>№ 002</b></span>
+  <span class="live"><i></i>Status: active</span>
+  <span class="opt">Opened <b>24 Sep 2026 · 18:31 UTC</b></span>
+  <span>Case open <b class="clock" id="clock">6d 06h 00m</b></span>
+  <span class="opt">Lead <b>REKTCOON</b></span>
+  <span class="opt">Last entry <b>30 Sep · 01:15 UTC</b></span>
 </div></div>
 
 <main class="wrap">
@@ -247,6 +336,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 <header class="hero">
   <img src="assets/rektcoon-banner.webp" alt="">
   <div class="sh"></div>
+  <div class="bigstamp">Active<br>investigation<small>case 002 · open</small></div>
   <div class="c">
     <span class="tag"><i></i>Case 002 · open · funds moving</span>
     <h1>Following <span class="g">$387.5M</span> of stolen Bitget money</h1>
@@ -267,9 +357,62 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   <div class="stat" style="--c:var(--red)"><div class="n">3 hacks</div><div class="l">Sharing one swap storefront</div></div>
 </div>
 
+<!-- CASE FILE -->
+<section id="brief">
+  <div class="sh2"><div><div class="eyebrow">§ 01 · Case file</div><h2>The <em>file</em> on Case 002</h2><p class="sub">What we know, what we filed, and what is still unknown.</p></div></div>
+  <div class="folder" style="margin-top:46px">
+    <div class="brief">
+      <div class="f"><span class="k">Case №</span><span>002 · "Following the Bitget money"</span></div>
+      <div class="f"><span class="k">Status</span><span><span class="st open">Active</span> funds still moving</span></div>
+      <div class="f"><span class="k">Incident</span><span>24 Sep 2026 · 18:31 UTC · Bitget hot wallets</span></div>
+      <div class="f"><span class="k">Loss</span><span><b>$387.5M</b> across 7 chains (Bitget figure)</span></div>
+      <div class="f"><span class="k">Vector</span><span>Compromised backend, spoofed transaction data (per Bitget). Media report a fake job interview and a compromised third-party tool.</span></div>
+      <div class="f"><span class="k">Attribution</span><span>North Korea / TraderTraitor, per Bitget, TRM and Elliptic. <small class="k">Not independently verified by us</small></span></div>
+      <div class="f"><span class="k">Laundering front</span><span><b style="color:var(--gold)">naswap</b> THORChain affiliate + <b style="color:var(--green)">naswap.io</b> storefront, shared with Kelp DAO and AFX Trade</span></div>
+      <div class="f"><span class="k">Front operator</span><span><span class="redact">████████████</span>unknown. We name no one.</span></div>
+      <div class="f"><span class="k">Wallets mapped</span><span>485 (246 ETH + 239 XRP), 120 BTC destinations</span></div>
+      <div class="f"><span class="k">Still movable</span><span>$375.0M in attacker-held addresses (Bitget tracker)</span></div>
+      <div class="f"><span class="k">Reports filed</span><span>2 to Bitget's recovery program: <span class="st filed">····RDBX</span> <span class="st filed">····2HSJ</span></span></div>
+      <div class="f"><span class="k">Published</span><span><a href="part-1.html">Part 1</a> · <a href="part-2.html">Part 2</a> · <a href="part-3.html">Part 3</a></span></div>
+      <p class="note">Everything in this file comes from public blockchains, public certificate logs and public statements. Each claim links to its source in the parts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE LOG -->
+<section id="log">
+  <div class="sh2"><div><div class="eyebrow">§ 02 · Case log</div><h2>The <em>investigation</em>, entry by entry</h2><p class="sub">Each check, finding and filing, newest first, all times in UTC.</p></div></div>
+  <div class="term" id="term">
+    <div class="bar"><i></i><i></i><i></i><span>rektcoon@case-002:~$ tail -f case.log</span></div>
+    <ul class="log">
+      <li><time>30 SEP 01:15</time><span class="ty chk">CHECK</span><span>naswap fee wallet thor148…m8sau still holds <b>138,320.64 RUNE</b>, unmoved. Zcash stash still <b>18,581.18 ZEC</b>.</span></li>
+      <li><time>30 SEP 01:10</time><span class="ty fil">FILED</span><span>Supplement to Bitget's recovery program: <b>naswap / naswap.io</b>, flagging the fee wallet and a hosting/registrar lead. Ref ····2HSJ.</span></li>
+      <li><time>30 SEP 00:54</time><span class="ty pub">PUBLISH</span><span>Off-chain evidence: <a href="part-3.html#website">naswap.io storefront</a>, code excerpts, VIP mirror, certificate history.</span></li>
+      <li><time>30 SEP</time><span class="ty fnd">FINDING</span><span>naswap.io's code hard-codes <b>AFFILIATE_NAME = 'naswap'</b> (30 bps). First TLS certificate was issued 20 Apr, the same day the THORName was registered.</span></li>
+      <li><time>29 SEP 18:57</time><span class="ty pub">PUBLISH</span><span><a href="part-3.html">Part 3</a>: one laundromat, three North Korea-linked hacks.</span></li>
+      <li><time>29 SEP 18:32</time><span class="ty chn">CHAIN</span><span>Zcash stash t1WgMd… spends again. Small chunks go to fresh t-addresses.</span></li>
+      <li class="more"><time>29 SEP 15:53</time><span class="ty chn">CHAIN</span><span><b>Last ETH storage wallet emptied.</b> The funnel phase is over.</span></li>
+      <li class="more"><time>29 SEP 13:47</time><span class="ty chn">CHAIN</span><span>Last swap tagged "naswap" seen on THORChain so far.</span></li>
+      <li class="more"><time>29 SEP</time><span class="ty fnd">FINDING</span><span>A Bitget attacker XRP wallet and AFX Trade-funded swaps both paid <b>bc1qtgzpq7…</b>. It's a hard link between the two hacks.</span></li>
+      <li class="more"><time>29 SEP</time><span class="ty fnd">FINDING</span><span>"naswap": 1,803 swaps, <b>99% from Kelp DAO, AFX Trade and Bitget</b>. Registered 41 hours after the Kelp hack.</span></li>
+      <li class="more"><time>29 SEP</time><span class="ty chk">CONFIRM</span><span>Bitget's tracker now lists the OKX deposit address we reported.</span></li>
+      <li class="more"><time>28 SEP 19:59</time><span class="ty pub">PUBLISH</span><span><a href="part-2.html">Part 2</a>: the launderers took a cut, then cashed it out to OKX.</span></li>
+      <li class="more"><time>28 SEP 19:49</time><span class="ty fil">FILED</span><span>Lead to Bitget: <b>131,981.53 USDT</b> of launderer fees deposited to an OKX account. Ref ····RDBX.</span></li>
+      <li class="more"><time>28 SEP</time><span class="ty fnd">FINDING</span><span>Affiliate thor18dvg…: 15 of 16 senders are attacker wallets. Its fees are swapped to USDT and swept to "OKX: Hot Wallet 5".</span></li>
+      <li class="more"><time>28 SEP</time><span class="ty fnd">FINDING</span><span>XRP leg mapped: 239 wallets, 5,281 THORChain deposits, 111 BTC destinations; 6 are shared with the ETH leg.</span></li>
+      <li class="more"><time>28 SEP 14:56</time><span class="ty pub">PUBLISH</span><span><a href="part-1.html">Part 1</a>. The case goes public.</span></li>
+      <li class="more"><time>27 SEP 07:40</time><span class="ty chn">CHAIN</span><span>Exploiter 5 starts moving after 2.5 days of silence.</span></li>
+      <li class="more"><time>24 SEP 19:29</time><span class="ty fnd">FINDING</span><span>$47.6M in stablecoins swapped to ETH in 21 minutes, before any freeze.</span></li>
+      <li class="more"><time>24 SEP 18:31</time><span class="ty inc">INCIDENT</span><span><b>Bitget hot wallets drained.</b> Case 002 opened.</span></li>
+    </ul>
+    <div class="log cur">watching: naswap fee wallet · ZEC stash · 163.66 BTC · OKX account</div>
+    <div class="foot"><span>19 entries · 2 filings · 3 parts</span><button id="logall">Show full log ↓</button></div>
+  </div>
+</section>
+
 <!-- STORY -->
 <section id="story">
-  <div class="sh2"><div><div class="eyebrow">The case in 60 seconds</div><h2>Six moves, from <em>theft</em> to cash-out</h2></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 03 · The case in 60 seconds</div><h2>Six moves, from <em>theft</em> to cash-out</h2></div></div>
   <div class="steps">
     <div class="step"><div class="ic">🔓</div><div class="when">24 Sep · 18:31 UTC</div><h3>The heist</h3><p>Attackers compromise a backend system in Bitget's wallet infrastructure and spoof transaction data. The exchange signs off on its own robbery: $387.5M leaves across seven chains.</p></div>
     <div class="step"><div class="ic">⏱️</div><div class="when">19:08 → 19:29</div><h3>21 minutes</h3><p>$47.6M in USDT/USDC plus tokenized gold becomes 22,327 ETH through UniswapX before Tether or Circle can freeze it, via a wallet upgraded with EIP-7702.</p></div>
@@ -282,7 +425,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 
 <!-- MONEY MAP -->
 <section id="map">
-  <div class="sh2"><div><div class="eyebrow">Interactive</div><h2>The <em>money map</em></h2><p class="sub">Hover a stream for details. Widths are approximate, to show proportions, not accounting.</p></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 04 · Money map</div><h2>The <em>money map</em></h2><p class="sub">Hover a stream for details. Widths are approximate, to show proportions, not accounting.</p></div></div>
   <div class="panel sankey">
   <div class="swipe">← swipe to see the whole map →</div>
   <svg viewBox="0 0 1000 470" role="img" aria-label="Sankey diagram of stolen Bitget funds by chain, route and endpoint">
@@ -322,7 +465,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 
 <!-- WHERE NOW -->
 <section id="now">
-  <div class="sh2"><div><div class="eyebrow">Status</div><h2>Where the money is <em>now</em></h2><p class="sub">Bitget's public tracker, 30 Sep 2026 (02:45 UTC). Almost all of it is still under the attacker's control, just not in a form anyone can freeze.</p></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 05 · Status</div><h2>Where the money is <em>now</em></h2><p class="sub">Bitget's public tracker, 30 Sep 2026. Almost all of it is still under the attacker's control, just not in a form anyone can freeze.</p></div></div>
   <div class="panel now">
     <div class="donut"><div class="c"><div><b>96.8%</b><span class="k">still attacker-held</span></div></div></div>
     <div class="rows">
@@ -339,16 +482,32 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 
 <!-- BOARD -->
 <section id="board">
-  <div class="sh2"><div><div class="eyebrow">Click a card</div><h2>The <em>evidence board</em></h2><p class="sub">Wallets, services and endpoints that matter. No people, only addresses and what they did.</p></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 06 · Exhibits · click a card</div><h2>The <em>evidence board</em></h2><p class="sub">Wallets, services and endpoints that matter, each with an exhibit number and a status. No people, only addresses and what they did.</p></div></div>
   <div class="board">
     <div class="cards" id="cards"></div>
     <aside class="dossier" id="dossier" aria-live="polite"></aside>
   </div>
 </section>
 
+<!-- LEADS -->
+<section id="leads">
+  <div class="sh2"><div><div class="eyebrow">§ 07 · Open leads</div><h2>What we're <em>watching</em></h2><p class="sub">Each lead is either filed with someone who can act, watched for movement, or still open. Last checked 30 Sep, 01:15 UTC.</p></div></div>
+  <div class="legend2"><span class="st filed">Filed</span> reported, awaiting action <span class="st watch">Watching</span> funds parked, any move matters <span class="st open">Open</span> still digging <span class="st ver">Confirmed</span> acted on</div>
+  <div class="leads">
+    <div class="lead-c" style="--lc:var(--green)"><div class="top"><span class="id">LEAD-01 · EX-12</span><span class="st ver">Confirmed</span></div><h3>OKX account behind 0x51B2…B7be</h3><p>131,981.53 USDT of launderer fees went to this deposit address. We filed it on 28 Sep, and Bitget's tracker now lists the address. Only OKX can identify the account holder.</p><div class="prog"><i style="width:70%"></i></div><div class="meta"><span>Filed <b>28 Sep 19:49</b></span><span>Next: OKX freeze / KYC</span></div></div>
+    <div class="lead-c" style="--lc:var(--cyan)"><div class="top"><span class="id">LEAD-02 · EX-09</span><span class="st watch">Watching</span></div><h3>naswap fee wallet: 138,320 RUNE</h3><p>thor148sahwr…m8sau earned fees on Kelp, AFX and Bitget swaps and has never cashed out. On 27 Sep it tried to add the RUNE to the BTC pool. Any transfer would signal a cash-out.</p><div class="prog"><i style="width:45%"></i></div><div class="meta"><span>Balance <b>138,320.64 RUNE</b></span><span>Unmoved since 27 Sep</span></div></div>
+    <div class="lead-c" style="--lc:var(--purple)"><div class="top"><span class="id">LEAD-03 · EX-10</span><span class="st filed">Filed</span></div><h3>Who runs naswap.io?</h3><p>The storefront sits behind Cloudflare with a registrar on file. Hosting and registrar records can identify the operator, but only authorities can request them. We filed it with Bitget on 30 Sep.</p><div class="prog"><i style="width:35%"></i></div><div class="meta"><span>Filed <b>30 Sep 01:10</b></span><span>Needs: legal request</span></div></div>
+    <div class="lead-c" style="--lc:var(--orange)"><div class="top"><span class="id">LEAD-04 · EX-07</span><span class="st watch">Watching</span></div><h3>Zcash stash: 18,581 ZEC (~$26M)</h3><p>This is the largest single block of Bitget funds still on a transparent address. Once it goes into the shielded pool, tracing is only possible by amount and timing.</p><div class="prog"><i style="width:40%"></i></div><div class="meta"><span>Balance <b>18,581.18 ZEC</b></span><span>Last spend 29 Sep 18:32</span></div></div>
+    <div class="lead-c" style="--lc:var(--gold)"><div class="top"><span class="id">LEAD-05 · EX-14</span><span class="st watch">Watching</span></div><h3>163.66 BTC in 7 second-hop wallets</h3><p>BTC from THORChain payouts that has not yet moved to a mixer or an exchange. The addresses were sent to Bitget for exchange flagging.</p><div class="prog"><i style="width:40%"></i></div><div class="meta"><span>Last checked <b>29 Sep</b></span><span>Watch: exchange deposits</span></div></div>
+    <div class="lead-c" style="--lc:var(--red)"><div class="top"><span class="id">LEAD-06 · EX-09</span><span class="st open">Open</span></div><h3>Who funded "naswap"?</h3><p>The registration wallet was funded 16 minutes before sign-up through bc1q3empk84… with CoinJoin-sized inputs (262,144 and 16,384 sats). Next step: trace it upstream.</p><div class="prog"><i style="width:20%"></i></div><div class="meta"><span>Opened <b>29 Sep</b></span><span>Next: upstream BTC trace</span></div></div>
+    <div class="lead-c" style="--lc:var(--red)"><div class="top"><span class="id">LEAD-07</span><span class="st open">Open</span></div><h3>Launderers asking for support in public chats</h3><p>ZachXBT reports that launderers ask swap services for help in public Discord and Telegram groups. Next: match order times against our swap timestamps. We follow only services and wallets, not private people.</p><div class="prog"><i style="width:10%"></i></div><div class="meta"><span>Opened <b>28 Sep</b></span><span>Next: timestamp matching</span></div></div>
+    <div class="lead-c" style="--lc:var(--muted)"><div class="top"><span class="id">LEAD-08 · EX-04</span><span class="st done">Closed</span></div><h3>ETH storage wallets</h3><p>About 69K ETH sat in round 10,000-ETH wallets. All of them were drained through the funnel by 29 Sep, 15:53 UTC.</p><div class="prog"><i style="width:100%"></i></div><div class="meta"><span>Closed <b>29 Sep 15:53</b></span><span>Result: 0 ETH left</span></div></div>
+  </div>
+</section>
+
 <!-- TIMELINE -->
 <section id="timeline">
-  <div class="sh2"><div><div class="eyebrow">April → September 2026</div><h2>The <em>timeline</em></h2></div>
+  <div class="sh2"><div><div class="eyebrow">§ 08 · April → September 2026</div><h2>The <em>timeline</em></h2></div>
     <div class="filters" id="filters"><button class="on" data-f="all">All</button><button data-f="kelp">Kelp DAO</button><button data-f="afx">AFX Trade</button><button data-f="bitget">Bitget</button><button data-f="us">Our findings</button></div></div>
   <div class="tl" id="tl">
     <div class="ti hot" data-f="kelp" style="--dot:var(--purple)"><time>18 Apr · 17:35 UTC</time><span class="pl" style="color:var(--purple)">Kelp DAO</span><p><b>Kelp DAO drained of ~$292M</b> through its LayerZero bridge. LayerZero attributes it to TraderTraitor (Lazarus).</p></div>
@@ -368,9 +527,33 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   </div>
 </section>
 
+<!-- LOCKER -->
+<section id="locker">
+  <div class="sh2"><div><div class="eyebrow">§ 09 · Evidence locker</div><h2>The raw <em>evidence</em></h2><p class="sub">Every dataset behind the claims, fingerprinted with SHA-256 so nobody can quietly change it. Click a hash to copy it.</p></div></div>
+  <div class="panel" style="overflow-x:auto">
+  <table class="locker">
+    <thead><tr><th>Item</th><th>File</th><th>What it shows</th><th>SHA-256</th></tr></thead>
+    <tbody>
+      <tr><td>DOC-01</td><td><a href="data/evidence_laundering_flow_2026-09-28.csv">laundering_flow.csv</a><br><small>367 KB</small></td><td>1,297 ETH-leg transfers with hashes across 246 laundering wallets</td><td class="h">1c9358bcace0be6273e8f6c57d12258fbcb240ccfe688a957d5676586ddb07b4</td></tr>
+      <tr><td>DOC-02</td><td><a href="data/evidence_hacker_wallets_2026-09-28.txt">hacker_wallets.txt</a><br><small>11 KB</small></td><td>ETH-leg wallet list, excluding THORChain vaults and addresses that existed before the hack</td><td class="h">ff3b232bf2fabaec17e23cb1f6e68ed0104c92c4e1fbf9b44010c7305987a3ec</td></tr>
+      <tr><td>DOC-03</td><td><a href="data/evidence_thorchain_to_btc.csv">thorchain_to_btc.csv</a><br><small>62 KB</small></td><td>Decoded THORChain memos: ETH → BTC destinations</td><td class="h">115903dc939e707091a357d8e227eb560822b3fab457c8cbd6f58f11c8b9790c</td></tr>
+      <tr><td>DOC-04</td><td><a href="data/xrp_thorchain_deposits.csv">xrp_thorchain_deposits.csv</a><br><small>1.4 MB</small></td><td>5,281 XRP-side THORChain deposits with memos</td><td class="h">fa04d61793c73579734f371ac2bb61b3a72990e0a0efd8f483b6c30923a0e07f</td></tr>
+      <tr><td>DOC-05</td><td><a href="data/xrp_hacker_wallets.txt">xrp_hacker_wallets.txt</a><br><small>8 KB</small></td><td>239 XRP laundering wallets from root rwNhef…CTck</td><td class="h">741ab942627b914b719ea9e091c9c7285a2c11e7d29bd674ec94b7509face6e4</td></tr>
+      <tr><td>DOC-06</td><td><a href="data/btc_destinations_all_legs.csv">btc_destinations_all_legs.csv</a><br><small>7 KB</small></td><td>120 BTC destinations from both legs; 6 are shared</td><td class="h">f5f4270ab6168b2e294c8700e87f0263ae1273b46167f596ccce85490a9fde61</td></tr>
+      <tr><td>DOC-07</td><td><a href="data/btc_addresses.txt">btc_addresses.txt</a><br><small>2 KB</small></td><td>First 15 BTC addresses (Part 1)</td><td class="h">afe3d06bd6b922776b7e287fffe83c24b5d051787e32f4db1c1c154a6de36b93</td></tr>
+      <tr><td>DOC-08</td><td><a href="data/naswap_swaps.csv">naswap_swaps.csv</a><br><small>396 KB</small></td><td>All 1,803 "naswap" swaps, each labeled by source hack</td><td class="h">9ba3dc8130015c08d44e303279fcfb87d3d68b91a0f030974385f19b6688204c</td></tr>
+      <tr><td>DOC-09</td><td><a href="data/crtsh_naswap.io.json">crtsh_naswap.io.json</a><br><small>9 KB</small></td><td>Certificate Transparency log for naswap.io; first certificate 20 Apr 2026</td><td class="h">cbecf30a48a9485ec9a5e9e6262370ac2f806903f4e1a93bb0d7e6927847da39</td></tr>
+      <tr><td>DOC-10</td><td><a href="assets/naswap-io.png">naswap-io.png</a><br><small>175 KB</small></td><td>Screenshot of the naswap.io storefront, 30 Sep 2026</td><td class="h">0eb63ca78ec71ca7d5571f2d5031678026a1af7af3c8f0c8988639a6b0d4cb6e</td></tr>
+      <tr><td>DOC-11</td><td>naswap.io page source<br><small>held by REKTCOON</small></td><td>Full HTML/JS snapshot of naswap.io and vip.naswap.io (identical), 30 Sep 2026. Available to Bitget and law enforcement on request.</td><td class="h">675af8fb2469d438c07bad11f1af479b7c5ddad1e06d1093556f83fe408e84a6</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="k" style="margin-top:10px">Check a file yourself: <span class="mono" style="text-transform:none">shasum -a 256 &lt;file&gt;</span></p>
+</section>
+
 <!-- LEARN -->
 <section id="learn">
-  <div class="sh2"><div><div class="eyebrow">Explainers</div><h2>How crypto <em>laundering</em> actually works</h2><p class="sub">The tools in this case, each in plain words and how it showed up here.</p></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 10 · Explainers</div><h2>How crypto <em>laundering</em> actually works</h2><p class="sub">The tools in this case, each in plain words and how it showed up here.</p></div></div>
   <div class="learn">
     <details class="lc" open><summary><span class="e">⚡</span><span><b>THORChain</b><small>Swap BTC for ETH with no account</small></span></summary><div class="bd"><p>A cross-chain exchange: you send coins to a vault with a short text <b>memo</b>, for example "=:BTC.BTC:bc1q…", and the network sends the other coin to that address. No sign-up, no KYC.</p><p class="here">Here: ~$187M of Bitget funds went through it. The memos are public, and that's how we found every destination.</p></div></details>
     <details class="lc"><summary><span class="e">🏷️</span><span><b>Affiliates</b><small>Who routed the swap, and their cut</small></span></summary><div class="bd"><p>Apps building on THORChain add their name and a fee in basis points to the memo. It's how wallets and interfaces get paid.</p><p class="here">Here: two affiliates existed almost only for stolen money, naswap (Kelp, AFX, Bitget) and thor18dvg… (Bitget only), which cashed its fees to OKX.</p></div></details>
@@ -386,7 +569,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 
 <!-- PARTS -->
 <section id="parts">
-  <div class="sh2"><div><div class="eyebrow">Read the investigation</div><h2>Three <em>parts</em></h2></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 11 · Read the investigation</div><h2>Three <em>parts</em></h2></div></div>
   <div class="parts">
     <a class="part" href="part-1.html"><div class="img" style="background-image:url(assets/og-case.png)"></div><div class="bd"><span class="pn">PART 1 · 27–28 SEP</span><h3>Following the Bitget money</h3><p>The 21-minute stablecoin swap, 246 laundering wallets, the first 15 BTC addresses.</p><span class="go">Read Part 1 →</span></div></a>
     <a class="part" href="part-2.html"><div class="img" style="background-image:url(assets/og-part2.png)"></div><div class="bd"><span class="pn">PART 2 · 28 SEP</span><h3>The launderers took a cut, then cashed it out to OKX</h3><p>XRP, TRON and BTC legs, 6 shared BTC wallets, 131,982 USDT to an OKX account.</p><span class="go">Read Part 2 →</span></div></a>
@@ -396,7 +579,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 
 <!-- STATEMENTS -->
 <section id="said">
-  <div class="sh2"><div><div class="eyebrow">On the record</div><h2>What the <em>players</em> said</h2></div></div>
+  <div class="sh2"><div><div class="eyebrow">§ 12 · Statements on record</div><h2>What the <em>players</em> said</h2></div></div>
   <div class="quotes">
     <div class="q"><div class="who"><b>Gracy Chen · Bitget CEO</b><span>28 Sep</span></div><blockquote>"Decentralization is a design principle, not a shield for facilitating known stolen funds."</blockquote><a href="https://www.cryptopolitan.com/thorchain-can-wont-freeze-bitget-hacker/" target="_blank" rel="noopener">Cryptopolitan ↗</a></div>
     <div class="q"><div class="who"><b>THORChain</b><span>28 Sep</span></div><blockquote>A network halt "is not a selective freeze of specific funds or an individual swap."</blockquote><a href="https://www.coindesk.com/tech/2026/09/28/thorchain-rejects-bitget-request-to-block-hacker-as-usd6-million-moves-to-bitcoin" target="_blank" rel="noopener">CoinDesk ↗</a></div>
@@ -407,6 +590,7 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   </div>
 </section>
 
+<div class="eof">— END OF PUBLIC FILE · CASE 002 REMAINS <b>OPEN</b> —</div>
 </main>
 
 <footer><div class="wrap grid">
@@ -418,40 +602,53 @@ footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 <script>
 (function(){
   var E=[
-    {id:"bitget",ty:"Victim",c:"var(--red)",nm:"Bitget hot wallets",hint:"Bitget 6 · Bitget 35",h:"Bitget hot & warm wallets",f:["$387.5M moved out on 24 Sep 18:31 UTC across 7 chains","Cause: compromised backend + spoofed transaction data (per CEO)","Protection fund (~$464M) covers users"],l:[["Exploiter 1","ex1"]]},
-    {id:"ex1",ty:"Attacker wallet",c:"var(--purple)",nm:"Bitget Exploiter 1",hint:"0x770b…63Ee",h:"Exploiter 1 · 0x770b10b273fC44Fe9197D6bF20F145c2e98463Ee",f:["Received 24,597 ETH, 34.75M USDT, 12.85M USDC, 3,000 XAUT","Handed stablecoins to the EIP-7702 swapper within minutes"],l:[["EIP-7702 swapper","ex2"],["Storage & funnel","funnel"]],a:"https://etherscan.io/address/0x770b10b273fC44Fe9197D6bF20F145c2e98463Ee"},
-    {id:"ex2",ty:"Attacker wallet",c:"var(--purple)",nm:"EIP-7702 swapper",hint:"Exploiter 2 · 0x7c96…3E1C",h:"Exploiter 2 · the 21-minute swap",f:["MetaMask StatelessDeleGator (EIP-7702)","45 fills 19:08–19:29 UTC → 22,327 ETH","Mostly via UniswapX"],l:[["Storage & funnel","funnel"]],a:"https://etherscan.io/address/0x7c96279Ec1e888Aa56b9B836e0dB26ca48573E1C"},
-    {id:"funnel",ty:"Attacker wallets",c:"var(--purple)",nm:"Storage & funnel",hint:"Exploiters 3–14 · 0 ETH left",h:"Round-number storage → funnel",f:["~69K ETH parked in 10,000-ETH lots","Relayed into Exploiter 4 ('funnel') on 28–29 Sep","Last storage wallet emptied 29 Sep 15:53 UTC","Sprayed across 246 fresh wallets"],l:[["THORChain","thor"]]},
-    {id:"xrp",ty:"Attacker wallet",c:"var(--cyan)",nm:"XRP root",hint:"rwNhef…CTck",h:"XRP root · rwNhefsz1UQEusxhCvHip3RANinWi4CTck",f:["102.98M XRP received","Split into 20M chunks, 239 fresh wallets","5,281 THORChain deposits; ~9K XRP left"],l:[["THORChain","thor"],["naswap","naswap"],["Shared BTC address","shared"]],a:"https://xrpscan.com/account/rwNhefsz1UQEusxhCvHip3RANinWi4CTck"},
-    {id:"tron",ty:"Attacker wallet",c:"var(--green)",nm:"TRON pre-built wallet",hint:"TDcu2C… · made 5h before",h:"TRON · TDcu2CMpyLK4M5wmE5tstAZv9ZjK7xPHNX",f:["Created 24 Sep 13:48 UTC, ~5 hours before the hack","Received 5.57M TRX","TRX → USDT/USDD → USDT0 bridge"],l:[["Bitget hot wallets","bitget"]]},
-    {id:"zec",ty:"Attacker wallet",c:"var(--orange)",nm:"Zcash stash",hint:"t1WgMd… · 18,581 ZEC",h:"Zcash · t1WgMdtND8NF7NDUuYmq8MpMj1NTCXkMDVG",f:["Received 18,917 ZEC on 24 Sep","18,581 ZEC (~$26M) still there on 29 Sep","Small pieces moving via fresh t-addresses, likely into the shielded pool"],l:[],a:"https://blockchair.com/zcash/address/t1WgMdtND8NF7NDUuYmq8MpMj1NTCXkMDVG"},
-    {id:"thor",ty:"Service",c:"var(--gold)",nm:"THORChain",hint:"~$187M swapped",h:"THORChain",f:["Main route from ETH/XRP into BTC","Refused Bitget's request to block the attacker","Memos reveal every destination"],l:[["naswap","naswap"],["thor18dvg…","aff"],["Bitcoin","btc"]]},
-    {id:"naswap",ty:"Launder front",c:"var(--gold)",nm:"naswap",hint:"Kelp · AFX · Bitget",h:"naswap · THORName owned by thor148sahwr…m8sau",f:["Registered 20 Apr 10:55 UTC, 41h after the Kelp DAO hack","1,803 swaps, 24 senders, 99% from three hacks","Fee wallet holds ~138K RUNE and never cashed out","Tried to add 49,654 RUNE to the BTC pool on 27 Sep"],l:[["naswap.io website","site"],["Kelp DAO","kelp"],["AFX Trade","afx"],["Shared BTC address","shared"]],a:"part-3.html"},
-    {id:"site",ty:"Off-chain",c:"var(--green)",nm:"naswap.io",hint:"the storefront website",h:"naswap.io · vip.naswap.io",f:["Live Chinese/English swap site on THORChain","Only three routes: ETH→BTC, XRP→BTC, XRP→ETH","Code: AFFILIATE_NAME = 'naswap', fee 30 bps; vip.naswap.io = 0 bps","First TLS certificate 20 Apr 2026, the same day the THORName was registered","Unlocks XRP wallets by seed phrase in-page"],l:[["naswap","naswap"]],a:"part-3.html#website"},
-    {id:"aff",ty:"Launder fee wallet",c:"var(--gold)",nm:"thor18dvg…krkjm4",hint:"only customer: attacker",h:"Affiliate thor18dvgrgpvxlh7rhhld4qjyrxs9c7tvwdakrkjm4",f:["401 swaps on 26–27 Sep; 15 of 16 senders are attacker wallets","Up to 0.6% fee, ~$177K declared","Cashed out RUNE → 131,982 USDT"],l:[["OKX deposit","okx"]],a:"part-2.html"},
-    {id:"okx",ty:"Exchange endpoint",c:"var(--cyan)",nm:"OKX deposit address",hint:"0x51B2…B7be",h:"0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be",f:["4 deposits, 131,981.53 USDT, 26–28 Sep","Sweeps to 'OKX: Hot Wallet 5' within 1–2 minutes","Reported to Bitget 28 Sep; now listed in Bitget's tracker"],l:[["thor18dvg…","aff"]],a:"https://etherscan.io/address/0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be#tokentxns"},
-    {id:"shared",ty:"Hard link",c:"var(--red)",nm:"bc1qtgzpq7…",hint:"paid by AFX + Bitget",h:"bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt",f:["25 Jul: payouts from AFX Trade-funded swaps","26 Sep: payout from a Bitget attacker XRP wallet","Swap memos name it explicitly both times"],l:[["AFX Trade","afx"],["XRP root","xrp"]],a:"https://mempool.space/address/bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt"},
-    {id:"btc",ty:"Endpoint",c:"var(--gold)",nm:"Bitcoin destinations",hint:"120 addresses",h:"BTC destinations from memos",f:["15 from the ETH leg, 111 from XRP, 6 shared","96 followed: 1,967 BTC received","Only 20.8 BTC went straight to CoinJoin","163.66 BTC untouched in 7 second-hop wallets"],l:[["Mixers","mix"]]},
-    {id:"mix",ty:"Endpoint",c:"var(--red)",nm:"Wasabi CoinJoin",hint:"~$3.94M",h:"Mixers",f:["~$3.94M per Bitget's tracker","AMLBot: ~4 BTC via TRON → ETH → THORChain → Wasabi"],l:[]},
-    {id:"kelp",ty:"Linked hack",c:"var(--purple)",nm:"Kelp DAO · Apr",hint:"$292M · TraderTraitor",h:"Kelp DAO exploit · 18 Apr 2026",f:["~$292M via LayerZero bridge","Attributed to TraderTraitor by LayerZero","228 swaps through naswap, all of its THORChain swaps"],l:[["naswap","naswap"]]},
-    {id:"afx",ty:"Linked hack",c:"var(--orange)",nm:"AFX Trade · Jul",hint:"$24M · UNC4899",h:"AFX Trade exploit · 22 Jul 2026",f:["$24.15M USDC, bridge keys compromised","AFX links it to UNC4899 / TraderTraitor","13 swaps through naswap; payout to bc1qtgzpq7…"],l:[["naswap","naswap"],["Shared BTC address","shared"]]}
+    {id:"bitget",st:"ver:Verified",ty:"Victim",c:"var(--red)",nm:"Bitget hot wallets",hint:"Bitget 6 · Bitget 35",h:"Bitget hot & warm wallets",f:["$387.5M moved out on 24 Sep 18:31 UTC across 7 chains","Cause: compromised backend + spoofed transaction data (per CEO)","Protection fund (~$464M) covers users"],l:[["Exploiter 1","ex1"]]},
+    {id:"ex1",st:"ver:Verified",ty:"Attacker wallet",c:"var(--purple)",nm:"Bitget Exploiter 1",hint:"0x770b…63Ee",h:"Exploiter 1 · 0x770b10b273fC44Fe9197D6bF20F145c2e98463Ee",f:["Received 24,597 ETH, 34.75M USDT, 12.85M USDC, 3,000 XAUT","Handed stablecoins to the EIP-7702 swapper within minutes"],l:[["EIP-7702 swapper","ex2"],["Storage & funnel","funnel"]],a:"https://etherscan.io/address/0x770b10b273fC44Fe9197D6bF20F145c2e98463Ee"},
+    {id:"ex2",st:"ver:Verified",ty:"Attacker wallet",c:"var(--purple)",nm:"EIP-7702 swapper",hint:"Exploiter 2 · 0x7c96…3E1C",h:"Exploiter 2 · the 21-minute swap",f:["MetaMask StatelessDeleGator (EIP-7702)","45 fills 19:08–19:29 UTC → 22,327 ETH","Mostly via UniswapX"],l:[["Storage & funnel","funnel"]],a:"https://etherscan.io/address/0x7c96279Ec1e888Aa56b9B836e0dB26ca48573E1C"},
+    {id:"funnel",st:"done:Emptied",ty:"Attacker wallets",c:"var(--purple)",nm:"Storage & funnel",hint:"Exploiters 3–14 · 0 ETH left",h:"Round-number storage → funnel",f:["~69K ETH parked in 10,000-ETH lots","Relayed into Exploiter 4 ('funnel') on 28–29 Sep","Last storage wallet emptied 29 Sep 15:53 UTC","Sprayed across 246 fresh wallets"],l:[["THORChain","thor"]]},
+    {id:"xrp",st:"done:Emptied",ty:"Attacker wallet",c:"var(--cyan)",nm:"XRP root",hint:"rwNhef…CTck",h:"XRP root · rwNhefsz1UQEusxhCvHip3RANinWi4CTck",f:["102.98M XRP received","Split into 20M chunks, 239 fresh wallets","5,281 THORChain deposits; ~9K XRP left"],l:[["THORChain","thor"],["naswap","naswap"],["Shared BTC address","shared"]],a:"https://xrpscan.com/account/rwNhefsz1UQEusxhCvHip3RANinWi4CTck"},
+    {id:"tron",st:"ver:Verified",ty:"Attacker wallet",c:"var(--green)",nm:"TRON pre-built wallet",hint:"TDcu2C… · made 5h before",h:"TRON · TDcu2CMpyLK4M5wmE5tstAZv9ZjK7xPHNX",f:["Created 24 Sep 13:48 UTC, ~5 hours before the hack","Received 5.57M TRX","TRX → USDT/USDD → USDT0 bridge"],l:[["Bitget hot wallets","bitget"]]},
+    {id:"zec",st:"watch:Watching",ty:"Attacker wallet",c:"var(--orange)",nm:"Zcash stash",hint:"t1WgMd… · 18,581 ZEC",h:"Zcash · t1WgMdtND8NF7NDUuYmq8MpMj1NTCXkMDVG",f:["Received 18,917 ZEC on 24 Sep","18,581 ZEC (~$26M) still there on 29 Sep","Small pieces moving via fresh t-addresses, likely into the shielded pool"],l:[],a:"https://blockchair.com/zcash/address/t1WgMdtND8NF7NDUuYmq8MpMj1NTCXkMDVG"},
+    {id:"thor",st:"ver:Verified",ty:"Service",c:"var(--gold)",nm:"THORChain",hint:"~$187M swapped",h:"THORChain",f:["Main route from ETH/XRP into BTC","Refused Bitget's request to block the attacker","Memos reveal every destination"],l:[["naswap","naswap"],["thor18dvg…","aff"],["Bitcoin","btc"]]},
+    {id:"naswap",st:"watch:Watching",ty:"Launder front",c:"var(--gold)",nm:"naswap",hint:"Kelp · AFX · Bitget",h:"naswap · THORName owned by thor148sahwr…m8sau",f:["Registered 20 Apr 10:55 UTC, 41h after the Kelp DAO hack","1,803 swaps, 24 senders, 99% from three hacks","Fee wallet holds ~138K RUNE and never cashed out","Tried to add 49,654 RUNE to the BTC pool on 27 Sep"],l:[["naswap.io website","site"],["Kelp DAO","kelp"],["AFX Trade","afx"],["Shared BTC address","shared"]],a:"part-3.html"},
+    {id:"site",st:"filed:Filed",ty:"Off-chain",c:"var(--green)",nm:"naswap.io",hint:"the storefront website",h:"naswap.io · vip.naswap.io",f:["Live Chinese/English swap site on THORChain","Only three routes: ETH→BTC, XRP→BTC, XRP→ETH","Code: AFFILIATE_NAME = 'naswap', fee 30 bps; vip.naswap.io = 0 bps","First TLS certificate 20 Apr 2026, the same day the THORName was registered","Unlocks XRP wallets by seed phrase in-page"],l:[["naswap","naswap"]],a:"part-3.html#website"},
+    {id:"aff",st:"ver:Verified",ty:"Launder fee wallet",c:"var(--gold)",nm:"thor18dvg…krkjm4",hint:"only customer: attacker",h:"Affiliate thor18dvgrgpvxlh7rhhld4qjyrxs9c7tvwdakrkjm4",f:["401 swaps on 26–27 Sep; 15 of 16 senders are attacker wallets","Up to 0.6% fee, ~$177K declared","Cashed out RUNE → 131,982 USDT"],l:[["OKX deposit","okx"]],a:"part-2.html"},
+    {id:"okx",st:"ver:Confirmed",ty:"Exchange endpoint",c:"var(--cyan)",nm:"OKX deposit address",hint:"0x51B2…B7be",h:"0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be",f:["4 deposits, 131,981.53 USDT, 26–28 Sep","Sweeps to 'OKX: Hot Wallet 5' within 1–2 minutes","Reported to Bitget 28 Sep; now listed in Bitget's tracker"],l:[["thor18dvg…","aff"]],a:"https://etherscan.io/address/0x51B2699f6295f9F7BEdd37b9A27bb687165DB7be#tokentxns"},
+    {id:"shared",st:"ver:Hard link",ty:"Hard link",c:"var(--red)",nm:"bc1qtgzpq7…",hint:"paid by AFX + Bitget",h:"bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt",f:["25 Jul: payouts from AFX Trade-funded swaps","26 Sep: payout from a Bitget attacker XRP wallet","Swap memos name it explicitly both times"],l:[["AFX Trade","afx"],["XRP root","xrp"]],a:"https://mempool.space/address/bc1qtgzpq7lqj45qxypajklmpgpv5w9fpyt7kpalnt"},
+    {id:"btc",st:"watch:Watching",ty:"Endpoint",c:"var(--gold)",nm:"Bitcoin destinations",hint:"120 addresses",h:"BTC destinations from memos",f:["15 from the ETH leg, 111 from XRP, 6 shared","96 followed: 1,967 BTC received","Only 20.8 BTC went straight to CoinJoin","163.66 BTC untouched in 7 second-hop wallets"],l:[["Mixers","mix"]]},
+    {id:"mix",st:"done:Endpoint",ty:"Endpoint",c:"var(--red)",nm:"Wasabi CoinJoin",hint:"~$3.94M",h:"Mixers",f:["~$3.94M per Bitget's tracker","AMLBot: ~4 BTC via TRON → ETH → THORChain → Wasabi"],l:[]},
+    {id:"kelp",st:"ver:Linked",ty:"Linked hack",c:"var(--purple)",nm:"Kelp DAO · Apr",hint:"$292M · TraderTraitor",h:"Kelp DAO exploit · 18 Apr 2026",f:["~$292M via LayerZero bridge","Attributed to TraderTraitor by LayerZero","228 swaps through naswap, all of its THORChain swaps"],l:[["naswap","naswap"]]},
+    {id:"afx",st:"ver:Linked",ty:"Linked hack",c:"var(--orange)",nm:"AFX Trade · Jul",hint:"$24M · UNC4899",h:"AFX Trade exploit · 22 Jul 2026",f:["$24.15M USDC, bridge keys compromised","AFX links it to UNC4899 / TraderTraitor","13 swaps through naswap; payout to bc1qtgzpq7…"],l:[["naswap","naswap"],["Shared BTC address","shared"]]}
   ];
   var cards=document.getElementById('cards'), dos=document.getElementById('dossier');
   function show(id){
     var e=E.filter(function(x){return x.id===id})[0]; if(!e) return;
     [].forEach.call(cards.children,function(c){c.classList.toggle('on',c.dataset.id===id)});
-    dos.innerHTML='<span class="stamp">'+e.ty+'</span><h3 style="color:'+e.c+'">'+e.nm+'</h3><div class="addr" style="color:var(--muted)">'+e.h+'</div><ul class="facts">'+e.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
+    var sp=e.st.split(':'), ex='EX-'+('0'+(E.indexOf(e)+1)).slice(-2);
+    dos.innerHTML='<div class="hd"><span class="stamp">'+e.ty+'</span><span class="st '+sp[0]+'">'+sp[1]+'</span><span class="exh">CASE 002 · '+ex+'</span></div><h3 style="color:'+e.c+'">'+e.nm+'</h3><div class="addr" style="color:var(--muted)">'+e.h+'</div><ul class="facts">'+e.f.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
       (e.l.length?'<div class="k" style="margin-top:14px">Connected to</div><div class="conn">'+e.l.map(function(x){return '<button data-go="'+x[1]+'">'+x[0]+' →</button>'}).join('')+'</div>':'')+
       (e.a?'<p style="margin:14px 0 0"><a href="'+e.a+'" '+(e.a.indexOf('http')===0?'target="_blank" rel="noopener"':'')+'>Open source ↗</a></p>':'');
   }
   E.forEach(function(e){
     var b=document.createElement('button'); b.className='ev'; b.dataset.id=e.id;
-    b.innerHTML='<span class="pin" style="background:'+e.c+';box-shadow:0 0 10px '+e.c+'"></span><div class="ty" style="color:'+e.c+'">'+e.ty+'</div><div class="nm">'+e.nm+'</div><div class="hint">'+e.hint+'</div>';
+    b.innerHTML='<span class="pin" style="background:'+e.c+';box-shadow:0 0 10px '+e.c+'"></span><div class="ty" style="color:'+e.c+'">'+e.ty+'</div><div class="nm">'+e.nm+'</div><div class="hint">'+e.hint+'</div><span class="st '+e.st.split(':')[0]+'">'+e.st.split(':')[1]+'</span><span class="exh">EX-'+('0'+(E.indexOf(e)+1)).slice(-2)+'</span>';
     b.onclick=function(){show(e.id); if(window.innerWidth<980) dos.scrollIntoView({behavior:'smooth',block:'start'})};
     cards.appendChild(b);
   });
   dos.addEventListener('click',function(ev){var t=ev.target.closest('[data-go]'); if(t) show(t.dataset.go)});
   show('naswap');
+
+  // case clock
+  var ck=document.getElementById('clock'), t0=Date.UTC(2026,8,24,18,31,0);
+  function tick(){var d=Math.max(0,Date.now()-t0)/1000, p=function(n){return (n<10?'0':'')+n};
+    ck.textContent=Math.floor(d/86400)+'d '+p(Math.floor(d%86400/3600))+'h '+p(Math.floor(d%3600/60))+'m '+p(Math.floor(d%60))+'s'}
+  tick(); setInterval(tick,1000);
+  // case log
+  var term=document.getElementById('term'), la=document.getElementById('logall');
+  la.onclick=function(){var o=term.classList.toggle('all'); la.textContent=o?'Collapse ↑':'Show full log ↓'};
+  // copy hashes
+  document.querySelectorAll('.locker .h').forEach(function(h){h.title='Click to copy';h.onclick=function(){
+    var t=h.textContent; if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){h.textContent='copied ✓';setTimeout(function(){h.textContent=t},900)},function(){})}});
 
   // timeline filter
   var fb=document.querySelectorAll('#filters button');
